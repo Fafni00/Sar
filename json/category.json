@@ -1,0 +1,32 @@
+[
+    {
+        "title" : "Furniture",
+        "img" : "assets/images/furniturelogo.png"
+    },
+
+    {
+        "title" : "Pottery",
+        "img" : "assets/images/pottery.png"
+    },
+
+    {
+        "title" : "Jewellery",
+        "img" : "assets/images/jewellery.png"
+    },
+
+    {
+        "title" : "Clothes",
+        "img" : "assets/images/clothes.png"
+    },
+
+    {
+        "title" : "Food Items",
+        "img" : "assets/images/food.png"
+    },
+
+    {
+        "title" : "Handmade Rugs",
+        "img" : "assets/images/rug.png"
+    }
+
+]
