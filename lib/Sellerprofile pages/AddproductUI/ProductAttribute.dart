@@ -1,7 +1,8 @@
 import 'package:ecommerce_app/Sellerprofile%20pages/AddProduct/product_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../utils/colors.dart';
+import '../../Utils/Colors.dart';
+
 
 class ProductAttributes extends StatefulWidget {
   const ProductAttributes({Key? key}) : super(key: key);
