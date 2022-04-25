@@ -1,6 +1,8 @@
 import 'package:ecommerce_app/category/Category%20Model/MainCategorymodel.dart';
+import 'package:ecommerce_app/category/Productscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/firestore.dart';
+import 'package:get/route_manager.dart';
 
 class MainCategories extends StatefulWidget {
   final String? selectedCat;
@@ -20,6 +22,7 @@ class _MainCategoriesState extends State<MainCategories> {
             MainCategory mainCategory = snapshot.data();
             return ExpansionTile(
               title: Text(mainCategory.mainCategory!),
+              
             );
           }),
     );

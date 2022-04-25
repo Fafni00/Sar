@@ -11,8 +11,10 @@ class SellerProvider with ChangeNotifier {
   Seller? seller;
 
   getsellerData() {
+    print(_service.user!.uid);
     _service.seller.doc(_service.user!.uid).get().then((document) {
       doc = document;
+      print(doc.toString());
       //to upload the seller information while adding the product in the database
       seller = Seller.fromJson(document.data() as Map<String, dynamic>);
       notifyListeners();

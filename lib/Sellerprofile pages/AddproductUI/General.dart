@@ -85,13 +85,13 @@ class _GeneralProductState extends State<GeneralProduct>
 
   @override
   void initState() {
-    // getCategories();
+    getCategories();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    //super.build(context);
+    super.build(context);
     return Consumer<ProductProvider>(builder: (context, provider, child) {
       return Scaffold(
         body: Padding(
@@ -188,44 +188,44 @@ class _GeneralProductState extends State<GeneralProduct>
                   inputaction: TextInputAction.done,
                   onChanged: (value) {
                     setState(() {
-                      if (int.parse(value) >
-                          provider.productData!['regularPrice']) {
-                        _service.scaffold(context,
-                            'Sale price must be lower than regular price ');
-                        return;
-                      }
+                      // if (int.parse(value) >
+                      //     provider.productData!['regularPrice']) {
+                      //   _service.scaffold(context,
+                      //       'Sale price must be lower than regular price ');
+                      //   return;
+                      // }
                       provider.getFormData(salesPrice: int.parse(value));
                       _salesPrice = true;
                     });
                   }),
               SizedBox(height: 10),
-              if (_salesPrice)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                      onTap: (() {
-                        showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime.now(),
-                          lastDate: DateTime(2024),
-                        ).then((value) {
-                          setState(() {
-                            provider.getFormData(saledate: value);
-                          });
+              // if (_salesPrice)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    onTap: (() {
+                      showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(2024),
+                      ).then((value) {
+                        setState(() {
+                          provider.getFormData(saledate: value);
                         });
-                      }),
-                      child: Text(
-                        'Add Sale Period',
-                        style: TextStyle(color: Colors.black, fontSize: 14),
-                      ),
+                      });
+                    }),
+                    child: Text(
+                      'Choose Date ',
+                      style: TextStyle(color: Colors.black, fontSize: 14),
                     ),
-                    if (provider.productData!['saledate'] != null)
-                      Text(_service
-                          .formattedDate(provider.productData!['saledate']))
-                  ],
-                )
+                  ),
+                  if (provider.productData!['saledate'] != null)
+                    Text(_service
+                        .formattedDate(provider.productData!['saledate']))
+                ],
+              )
             ])),
       );
     });

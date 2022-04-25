@@ -112,7 +112,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                         //to dismiss the easyloading sign after saving data
                                         EasyLoading.dismiss();
                                         //to clear the form after data is submitted
-                                        // _provider.clearProductData();
+                                        _provider.clearProductData();
                                       });
                                     });
                                   }

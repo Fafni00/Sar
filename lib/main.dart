@@ -3,7 +3,6 @@
 import 'package:ecommerce_app/Addproduct.dart';
 import 'package:ecommerce_app/Sellerprofile%20pages/AddproductUI/AddProductspage.dart';
 import 'package:ecommerce_app/UserProfile/UserProflie.dart';
-import 'package:ecommerce_app/UserRegistration/Authprovider.dart';
 import 'package:ecommerce_app/UserRegistration/UserLogin.dart';
 import 'package:ecommerce_app/Model/productnotifier.dart';
 import 'package:ecommerce_app/Sellerprofile%20pages/AllProducts/AllProduct.dart';
@@ -26,8 +25,7 @@ Future<void> main() async {
   runApp(
     MultiProvider(providers: [
       ChangeNotifierProvider(create: (_) => ProductNotifier()),
-      ChangeNotifierProvider(create: (_) => AuthProvider()),
-      ChangeNotifierProvider(create: (_) => SellerProvider()),
+      Provider<SellerProvider>(create: (_) => SellerProvider()),
       ChangeNotifierProvider(create: (_) => ProductProvider()),
     ], child: MyApp()),
   );

@@ -1,20 +1,37 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:ecommerce_app/UserRegistration/Authprovider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_app/UserProfile/Order%20pages/Vieworderpage.dart';
 import 'package:ecommerce_app/UserRegistration/UserLogin.dart';
 import 'package:ecommerce_app/UserProfile/Userprofileupdate.dart';
+import 'package:ecommerce_app/UserRegistration/Usermodel.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
 
-class UserProfile extends StatelessWidget {
+class UserProfile extends StatefulWidget {
   const UserProfile({Key? key}) : super(key: key);
 
   @override
+  State<UserProfile> createState() => _UserProfileState();
+}
+
+class _UserProfileState extends State<UserProfile> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    getUserDetail();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var userDetails = Provider.of<AuthProvider>(context);
-    User? user = FirebaseAuth.instance.currentUser;
     return Scaffold(
         backgroundColor: const Color(0xFFe2efdd),
         appBar: AppBar(
@@ -25,20 +42,6 @@ class UserProfile extends StatelessWidget {
             style: TextStyle(
                 fontSize: 50, fontWeight: FontWeight.bold, color: Colors.white),
           ),
-          leading: Container(
-            margin: EdgeInsets.only(left: 300),
-            child: IconButton(
-                icon: Icon(
-                  Icons.logout,
-                  color: Colors.white,
-                  size: 30,
-                ),
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: ((context) => Loginpage())));
-                }),
-          ),
         ),
         body: Center(
           child: Column(children: [
@@ -47,7 +50,7 @@ class UserProfile extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Text('My Account',
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 40,
                         color: AppColors.text1Color,
                       ))),
             ),
@@ -59,7 +62,7 @@ class UserProfile extends StatelessWidget {
                     CircleAvatar(
                         radius: 40,
                         backgroundColor: Colors.grey,
-                        child: Text('j',
+                        child: Text('U',
                             style: TextStyle(
                               fontSize: 15,
                               color: AppColors.text1Color,
@@ -74,13 +77,13 @@ class UserProfile extends StatelessWidget {
                             child: Container(
                               height: 70,
                               child: Column(children: [
-                                Text('Edit User Name',
+                                Text('${loggedInUser.name}',
                                     style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 30,
                                       color: AppColors.text1Color,
                                     )),
                                 Text(
-                                  'Email',
+                                  '${loggedInUser.email}',
                                   style: TextStyle(
                                     fontSize: 15,
                                     color: AppColors.text1Color,
@@ -99,7 +102,6 @@ class UserProfile extends StatelessWidget {
                       icon: Icon(Icons.edit_outlined,
                           color: AppColors.buttonbackgroundColor),
                       onPressed: () {
-                        FirebaseAuth.instance.signOut();
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -112,12 +114,17 @@ class UserProfile extends StatelessWidget {
             ListTile(
                 leading: Icon(Icons.history),
                 title: Text('My Orders'),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: ((context) => ViewOrder())));
+                },
                 horizontalTitleGap: 5,
                 shape:
                     Border(bottom: BorderSide(color: AppColors.buttonColor))),
             ListTile(
                 leading: Icon(Icons.comment),
                 title: Text('Reviews & Ratings'),
+                onTap: () {},
                 horizontalTitleGap: 5,
                 shape:
                     Border(bottom: BorderSide(color: AppColors.buttonColor))),
@@ -129,11 +136,27 @@ class UserProfile extends StatelessWidget {
                     Border(bottom: BorderSide(color: AppColors.buttonColor))),
             ListTile(
                 leading: Icon(Icons.logout),
-                title: Text('Notifications'),
+                title: Text('Logout'),
+                onTap: () {
+                  FirebaseAuth.instance.signOut();
+                  Navigator.pushReplacementNamed(context, Loginpage.id);
+                },
                 horizontalTitleGap: 5,
                 shape:
                     Border(bottom: BorderSide(color: AppColors.buttonColor))),
           ]),
         ));
+  }
+
+  //get userdetails
+  getUserDetail() async {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(user!.uid)
+        .get()
+        .then(((value) {
+      loggedInUser = UserModel.fromMap(value.data());
+      setState(() {});
+    }));
   }
 }

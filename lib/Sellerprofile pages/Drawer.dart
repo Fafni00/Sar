@@ -31,81 +31,79 @@ class SellerDrawer extends StatelessWidget {
       );
     }
 
-    return Consumer<ProductProvider>(builder: (context, provider, child) {
-      return Drawer(
-          child: Column(children: [
-        Container(
-          height: 130,
-          color: Color(0xFF056608),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              DrawerHeader(
-                child: _sellerData.doc == null
-                    ? Text('Fetching..',
-                        style: TextStyle(color: Colors.white, fontSize: 10))
-                    : Row(
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                height: 40,
-                                child: CachedNetworkImage(
-                                    imageUrl: _sellerData.doc!['storeImage']),
-                              ),
-                              SizedBox(width: 6),
-                              Text(
-                                _sellerData.doc!['storeName'],
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 10),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-              ),
-            ],
-          ),
-        ),
-        Expanded(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              _menu(
-                  menuTitle: 'Home',
-                  icon: Icons.home,
-                  route: SellerProfileSection.id),
-              ExpansionTile(
-                  leading: Icon(
-                    Icons.production_quantity_limits,
-                    color: Color(0xFF056608),
-                  ),
-                  title: Text('products',
-                      style: TextStyle(color: Color(0xFF056608))),
-                  children: [
-                    _menu(
-                        menuTitle: 'All Products',
-                        icon: Icons.shopping_bag_outlined,
-                        route: AllProduct.id),
-                    _menu(
-                        menuTitle: 'Add Product',
-                        icon: Icons.add_shopping_cart,
-                        route: AddProductScreen.id),
-                  ])
-            ],
-          ),
-        ),
-        ListTile(
-            title: Text('Signout', style: TextStyle(color: Color(0xFF056608))),
-            trailing: Icon(
-              Icons.exit_to_app,
-              color: Color(0xFF056608),
+    return Drawer(
+        child: Column(children: [
+      Container(
+        height: 130,
+        color: Color(0xFF056608),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            DrawerHeader(
+              child: _sellerData.doc == null
+                  ? Text('Fetching..',
+                      style: TextStyle(color: Colors.white, fontSize: 10))
+                  : Row(
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 40,
+                              child: CachedNetworkImage(
+                                  imageUrl: _sellerData.doc!['storeImage']),
+                            ),
+                            SizedBox(width: 6),
+                            Text(
+                              _sellerData.doc!['storeName'],
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 10),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
             ),
-            onTap: () {
-              FirebaseAuth.instance.signOut();
-              Navigator.pushReplacementNamed(context, Loginpage.id);
-            }),
-      ]));
-    });
+          ],
+        ),
+      ),
+      Expanded(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            _menu(
+                menuTitle: 'Home',
+                icon: Icons.home,
+                route: SellerProfileSection.id),
+            ExpansionTile(
+                leading: Icon(
+                  Icons.production_quantity_limits,
+                  color: Color(0xFF056608),
+                ),
+                title: Text('products',
+                    style: TextStyle(color: Color(0xFF056608))),
+                children: [
+                  _menu(
+                      menuTitle: 'All Products',
+                      icon: Icons.shopping_bag_outlined,
+                      route: AllProduct.id),
+                  _menu(
+                      menuTitle: 'Add Product',
+                      icon: Icons.add_shopping_cart,
+                      route: AddProductScreen.id),
+                ])
+          ],
+        ),
+      ),
+      ListTile(
+          title: Text('Signout', style: TextStyle(color: Color(0xFF056608))),
+          trailing: Icon(
+            Icons.exit_to_app,
+            color: Color(0xFF056608),
+          ),
+          onTap: () {
+            FirebaseAuth.instance.signOut();
+            Navigator.pushReplacementNamed(context, Loginpage.id);
+          }),
+    ]));
   }
 }
