@@ -14,7 +14,7 @@ class DeliveryTab extends StatefulWidget {
 class _DeliveryTabState extends State<DeliveryTab>
     with AutomaticKeepAliveClientMixin {
   final FirebaseService _service = FirebaseService();
-  bool? _manageInventory = false;
+  bool? _manageDeliveries = false;
   @override
   bool get wantKeepAlive => true;
   @override
@@ -31,14 +31,14 @@ class _DeliveryTabState extends State<DeliveryTab>
                     style: TextStyle(
                         color: AppColors.buttonColor.withOpacity(0.9),
                         fontSize: 14)),
-                value: _manageInventory,
+                value: _manageDeliveries,
                 onChanged: (value) async {
                   setState(() {
-                    _manageInventory = value;
-                    provider.getFormData(manageInventory: value);
+                    _manageDeliveries = value;
+                    provider.getFormData(manageDeliveries: value);
                   });
                 }),
-            if (_manageInventory == true)
+            if (_manageDeliveries == true)
               Column(children: [
                 _service.formField(
                     label: 'Delivery Charge',
@@ -46,7 +46,7 @@ class _DeliveryTabState extends State<DeliveryTab>
                     inputaction: TextInputAction.next,
                     onChanged: (value) {
                       provider.getFormData(
-                        stockonhand: int.parse(value),
+                        deliveryCharge: int.parse(value),
                       );
                     }),
                 const SizedBox(

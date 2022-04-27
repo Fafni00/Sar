@@ -12,6 +12,7 @@ class ProductProvider with ChangeNotifier {
       int? salesPrice,
       String? category,
       String? mainCategory,
+      String? subCategory,
       String? description,
       DateTime? saledate,
       String? sku,
@@ -39,11 +40,17 @@ class ProductProvider with ChangeNotifier {
     if (salesPrice != null) {
       productData!['salesPrice'] = salesPrice;
     }
+    if (regularPrice != null) {
+      productData!['regularPrice'] = regularPrice;
+    }
     if (category != null) {
       productData!['category'] = category;
     }
     if (mainCategory != null) {
       productData!['mainCategory'] = mainCategory;
+    }
+    if (subCategory != null) {
+      productData!['subCategory'] = subCategory;
     }
     if (description != null) {
       productData!['description'] = description;

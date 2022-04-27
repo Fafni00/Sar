@@ -13,6 +13,8 @@ class FirebaseServices {
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
 
+  get products => null;
+
   Future<String?> uploadImage(XFile? file, String? reference) async {
     File _file = File(file!.path);
     firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance

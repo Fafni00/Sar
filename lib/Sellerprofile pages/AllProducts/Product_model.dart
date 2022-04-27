@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:date_time_format/date_time_format.dart';
 
 class Product {
   Product(
@@ -27,25 +30,53 @@ class Product {
 
   Product.fromJson(Map<String, Object?> json)
       : this(
-            productName: json['productName']! as String,
-            storeName: json['storeName']! as String,
-            regularPrice: json['regularPrice']! as int,
-            salesPrice: json['salesPrice']! as int,
-            category: json['category']! as String,
-            mainCategory: json['mainCategory']! as String,
-            description: json['description']! as String,
-            saledate: json['saledate']! as DateTime,
-            sku: json['sku']! as String,
-            manageInventory: json['manageInventory']! as bool,
-            stockonhand: json['stockonhand']! as int,
-            reOrderLevel: json['reOrderLevel']! as int,
-            manageDeliveries: json['manageDeliveries']! as bool,
-            deliveryCharge: json['deliveryCharge']! as int,
-            deliveryLocation: json['deliveryLocation']! as String,
-            tags: json['tags']! as String,
-            sizeList: json['sizeList']! as List,
-            additionalDetail: json['additionalDetail']! as String,
-            unit: json['unit']! as String,
+            productName: json['productName'] == null
+                ? null
+                : json['productName']! as String,
+            storeName:
+                json['storeName'] == null ? null : json['storeName']! as String,
+            regularPrice: json['regularPrice'] == null
+                ? null
+                : json['regularPrice']! as int,
+            salesPrice:
+                json['salesPrice'] == null ? null : json['salesPrice']! as int,
+            category:
+                json['category'] == null ? null : json['category']! as String,
+            mainCategory: json['mainCategory'] == null
+                ? null
+                : json['mainCategory']! as String,
+            description: json['description'] == null
+                ? null
+                : json['description']! as String,
+            saledate: json['saledate'] == null
+                ? null
+                : json['saledate']! as Timestamp,
+            sku: json['sku'] == null ? null : json['sku']! as String,
+            manageInventory: json['manageInventory'] == null
+                ? null
+                : json['manageInventory']! as bool,
+            stockonhand: json['stockonhand'] == null
+                ? null
+                : json['stockonhand']! as int,
+            reOrderLevel: json['reOrderLevel'] == null
+                ? null
+                : json['reOrderLevel']! as int,
+            manageDeliveries: json['manageDeliveries'] == null
+                ? null
+                : json['manageDeliveries']! as bool,
+            deliveryCharge: json['deliveryCharge'] == null
+                ? null
+                : json['deliveryCharge']! as int,
+            deliveryLocation: json['deliveryLocation'] == null
+                ? null
+                : json['deliveryLocation']! as String,
+            tags: json['tags'] == null ? null : json['tags']! as String,
+            sizeList:
+                json['sizeList'] == null ? null : json['sizeList']! as List,
+            additionalDetail: json['additionalDetail'] == null
+                ? null
+                : json['additionalDetail']! as String,
+            unit: json['unit'] == null ? null : json['unit']! as String,
             imageUrls: json['imageUrls']! as List,
             vendor: json['vendor']! as Map,
             approved: json['approved']! as bool);
@@ -57,7 +88,7 @@ class Product {
   final String? category;
   final String? mainCategory;
   final String? description;
-  final DateTime? saledate;
+  final Timestamp? saledate;
   final String? sku;
   final bool? manageInventory;
   final int? stockonhand;
@@ -102,7 +133,7 @@ class Product {
 }
 
 productQuery(approved) {
-  FirebaseFirestore.instance
+  return FirebaseFirestore.instance
       .collection('products')
       .where('approved', isEqualTo: approved)
       .orderBy('productName')

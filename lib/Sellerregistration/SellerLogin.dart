@@ -1,4 +1,3 @@
-import 'package:ecommerce_app/SellerHomepage/Homepage.dart';
 import 'package:ecommerce_app/SellerHomepage/SellerNavigation.dart';
 import 'package:ecommerce_app/Sellerregistration/Firebase_service.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';

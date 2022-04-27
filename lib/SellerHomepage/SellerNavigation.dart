@@ -1,12 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:ecommerce_app/Navigationpages/Cart.dart';
-import 'package:ecommerce_app/Navigationpages/Homepage.dart';
+import 'package:ecommerce_app/SellerHomepage/SellerHomepage.dart';
 import 'package:ecommerce_app/Sellerprofile%20pages/SellerProfileSection.dart';
-import 'package:ecommerce_app/category/Categories.dart';
-import 'package:ecommerce_app/Navigationpages/Profile.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class Sellernavigation extends StatefulWidget {
@@ -18,7 +14,7 @@ class Sellernavigation extends StatefulWidget {
 
 class _SellernavigationState extends State<Sellernavigation> {
   List pages = [
-    Homepage(),
+    SellerHomepage(),
     SellerProfileSection(),
   ];
   int currentIndex = 0;

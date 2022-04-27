@@ -1,10 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:ecommerce_app/Banner/Categoryforhomepage.dart';
-import 'package:ecommerce_app/Banner/banner_widge_page.dart';
-import 'package:ecommerce_app/Banner/producthighlights.dart';
 import 'package:ecommerce_app/SellerHomepage/Sellerbanner.dart';
-import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:flutter/material.dart';
 
 class SellerHomepage extends StatefulWidget {
@@ -29,10 +25,11 @@ class _SellerHomepageState extends State<SellerHomepage> {
         alignment: Alignment.topLeft,
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/images/Decor3.png"), fit: BoxFit.cover),
+              image: AssetImage("assets/images/Decor3.png"),
+              fit: BoxFit.contain),
         ),
       ),
-      SellerBanner()
+      SellerBanner(),
     ])));
   }
 }

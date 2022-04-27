@@ -81,6 +81,13 @@ class FirebaseService {
     return outputdate;
   }
 
+  //for number format
+  formattedNumber(number) {
+    var f = NumberFormat("#,##,###");
+    String formattedNumber = f.format(number);
+    return formattedNumber;
+  }
+
 //to use the formfield widget everywhere
   Widget formField(
       {String? label,

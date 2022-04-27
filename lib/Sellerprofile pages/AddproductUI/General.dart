@@ -21,56 +21,54 @@ class _GeneralProductState extends State<GeneralProduct>
   bool get wantKeepAlive => true;
   final FirebaseService _service = FirebaseService();
   final List<String> _categories = [];
-  bool _salesPrice = false;
   String? selectedCategory;
 
 //to craete the dropdown button
   Widget _categoryDropDown(ProductProvider provider) {
     return DropdownButtonFormField<String>(
-        value: selectedCategory,
-        hint: Text('Select Category',
-            style: TextStyle(
-                color: AppColors.buttonColor.withOpacity(0.5), fontSize: 14)),
-        icon: const Icon(Icons.arrow_drop_down, color: Color(0xFF056608)),
-        decoration: InputDecoration(
-          contentPadding:
-              EdgeInsets.only(top: 15, bottom: 15, left: 20, right: 20),
-          border: InputBorder.none,
-          fillColor: Colors.white,
-          filled: true,
-          //for focused border
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.vertical(),
-              borderSide: BorderSide(
-                width: 1.0,
-                color: AppColors.textboxColor,
-              )),
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.vertical(),
-              borderSide: BorderSide(
-                width: 2.0,
-                color: AppColors.textboxColor,
-              )),
-        ),
-        elevation: 16,
-        style: const TextStyle(color: Color(0xFF056608)),
-        onChanged: (String? newValue) {
-          setState(() {
-            selectedCategory = newValue;
-            provider.getFormData();
-          });
-        },
-        items: _categories.map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value),
-          );
-        }).toList(),
-        validator: (value) {
-          if (value!.isEmpty) {
-            return 'Select categories';
-          }
+      value: selectedCategory,
+      hint: Text('Select Category',
+          style: TextStyle(
+              color: AppColors.buttonColor.withOpacity(0.5), fontSize: 14)),
+      icon: const Icon(Icons.arrow_drop_down, color: Color(0xFF056608)),
+      decoration: InputDecoration(
+        contentPadding:
+            EdgeInsets.only(top: 15, bottom: 15, left: 20, right: 20),
+        border: InputBorder.none,
+        fillColor: Colors.white,
+        filled: true,
+        //for focused border
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.vertical(),
+            borderSide: BorderSide(
+              width: 1.0,
+              color: AppColors.textboxColor,
+            )),
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.vertical(),
+            borderSide: BorderSide(
+              width: 2.0,
+              color: AppColors.textboxColor,
+            )),
+      ),
+      elevation: 16,
+      style: const TextStyle(color: Color(0xFF056608)),
+      onChanged: (String? newValue) {
+        setState(() {
+          selectedCategory = newValue;
+          provider.getFormData(category: newValue);
         });
+      },
+      items: _categories.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      validator: (value) {
+        if (value!.isEmpty) return 'Select Category';
+      },
+    );
   }
 
   getCategories() {
@@ -126,7 +124,7 @@ class _GeneralProductState extends State<GeneralProduct>
                   type: TextInputType.multiline,
                   inputaction: TextInputAction.next,
                   minLine: 2,
-                  maxLine: 20,
+                  maxLine: 5,
                   onChanged: (value) {
                     provider.getFormData(description: value);
                   }),
@@ -136,6 +134,7 @@ class _GeneralProductState extends State<GeneralProduct>
               //for product Category
               _categoryDropDown(provider),
               SizedBox(height: 8),
+              //for main Category
               Padding(
                 padding: const EdgeInsets.only(top: 20, bottom: 10),
                 child: Row(
@@ -143,7 +142,7 @@ class _GeneralProductState extends State<GeneralProduct>
                   children: [
                     Text(
                       provider.productData!['mainCategory'] ??
-                          'Select Sub Category',
+                          'Select Main Category',
                       style: TextStyle(
                           color: AppColors.buttonColor.withOpacity(0.5),
                           fontSize: 14),
@@ -156,6 +155,43 @@ class _GeneralProductState extends State<GeneralProduct>
                                 builder: (context) {
                                   return MainCategoryList(
                                       selectedCategory: selectedCategory,
+                                      provider: provider);
+                                }).whenComplete(() {
+                              setState(() {});
+                            });
+                          },
+                          child: const Icon(Icons.arrow_drop_down,
+                              color: Color(0xFF056608)))
+                  ],
+                ),
+              ),
+              Divider(
+                height: 30,
+                color: Color(0xFF056608),
+              ),
+              SizedBox(height: 30),
+              //for subcategroies
+              Padding(
+                padding: const EdgeInsets.only(top: 20, bottom: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      provider.productData!['subCategory'] ??
+                          'Select Sub Category',
+                      style: TextStyle(
+                          color: AppColors.buttonColor.withOpacity(0.5),
+                          fontSize: 14),
+                    ),
+                    if (selectedCategory != null)
+                      InkWell(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return SubCategoryList(
+                                      selectedMainCategory:
+                                          provider.productData!['mainCategory'],
                                       provider: provider);
                                 }).whenComplete(() {
                               setState(() {});
@@ -188,18 +224,10 @@ class _GeneralProductState extends State<GeneralProduct>
                   inputaction: TextInputAction.done,
                   onChanged: (value) {
                     setState(() {
-                      // if (int.parse(value) >
-                      //     provider.productData!['regularPrice']) {
-                      //   _service.scaffold(context,
-                      //       'Sale price must be lower than regular price ');
-                      //   return;
-                      // }
                       provider.getFormData(salesPrice: int.parse(value));
-                      _salesPrice = true;
                     });
                   }),
               SizedBox(height: 10),
-              // if (_salesPrice)
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -218,7 +246,9 @@ class _GeneralProductState extends State<GeneralProduct>
                     }),
                     child: Text(
                       'Choose Date ',
-                      style: TextStyle(color: Colors.black, fontSize: 14),
+                      style: TextStyle(
+                          color: AppColors.buttonColor.withOpacity(0.5),
+                          fontSize: 14),
                     ),
                   ),
                   if (provider.productData!['saledate'] != null)
@@ -232,7 +262,7 @@ class _GeneralProductState extends State<GeneralProduct>
   }
 }
 
-//create the page for subcategories
+//create the page for maincategories
 class MainCategoryList extends StatelessWidget {
   final String? selectedCategory;
   final ProductProvider? provider;
@@ -256,7 +286,7 @@ class MainCategoryList extends StatelessWidget {
             }
             if (snapshot.data!.size == 0) {
               return Center(
-                child: Text('No Sub Categories'),
+                child: Text('No Main Categories'),
               );
             }
             return ListView.builder(
@@ -270,6 +300,51 @@ class MainCategoryList extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     title: Text(snapshot.data!.docs[index]['mainCategory']),
+                  );
+                });
+          }),
+    );
+  }
+}
+
+//create the page for maincategories
+class SubCategoryList extends StatelessWidget {
+  final String? selectedMainCategory;
+  final ProductProvider? provider;
+  const SubCategoryList({this.selectedMainCategory, this.provider, Key? key})
+      : super(key: key);
+
+  // to add the subcategories after main category has been selecetd in the form
+  @override
+  Widget build(BuildContext context) {
+    final FirebaseService _service = FirebaseService();
+    return Dialog(
+      child: FutureBuilder<QuerySnapshot>(
+          future: _service.subCategories
+              .where('mainCategory', isEqualTo: selectedMainCategory)
+              .get(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (snapshot.data!.size == 0) {
+              return Center(
+                child: Text('No Sub Categories'),
+              );
+            }
+            return ListView.builder(
+                itemCount: snapshot.data!.size,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    onTap: () {
+                      provider!.getFormData(
+                          subCategory: snapshot.data!.docs[index]
+                              ['subCategoryName']);
+                      Navigator.pop(context);
+                    },
+                    title: Text(snapshot.data!.docs[index]['subCategoryName']),
                   );
                 });
           }),

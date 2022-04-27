@@ -102,7 +102,7 @@ class _ProductAttributesState extends State<ProductAttributes>
       onChanged: (String? newValue) {
         setState(() {
           selectedUnit = newValue;
-          provider.getFormData();
+          provider.getFormData(unit: newValue);
         });
       },
       items: _units.map<DropdownMenuItem<String>>((String value) {
@@ -232,7 +232,7 @@ class _ProductAttributesState extends State<ProductAttributes>
 
             //for additional Detail
             _formField(
-                label: 'Additioanl Detail',
+                label: 'Additional Detail',
                 type: TextInputType.text,
                 inputaction: TextInputAction.done,
                 maxLine: 6,

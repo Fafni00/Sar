@@ -25,7 +25,6 @@ class _UserProfileState extends State<UserProfile> {
 
   @override
   void initState() {
-    // TODO: implement initState
     getUserDetail();
     super.initState();
   }
