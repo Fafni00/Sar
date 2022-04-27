@@ -8,7 +8,7 @@ import 'package:ecommerce_app/Sellerprofile%20pages/Sellerprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../utils/colors.dart';
+import '../../Utils/Colors.dart';
 
 class SellerProfileSection extends StatelessWidget {
   static const String id = 'sellerprofile';

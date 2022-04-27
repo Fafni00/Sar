@@ -4,12 +4,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/UserRegistration/UserLogin.dart';
 import 'package:ecommerce_app/UserRegistration/Usermodel.dart';
 import 'package:ecommerce_app/Sellerregistration/SellerRegistrationForm.dart';
-import 'package:ecommerce_app/utils/colors.dart';
+//import 'package:ecommerce_app/utils/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+
+import '../Utils/Colors.dart';
 
 class UserRegistrationPage extends StatefulWidget {
   const UserRegistrationPage({Key? key}) : super(key: key);

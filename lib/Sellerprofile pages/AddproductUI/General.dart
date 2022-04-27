@@ -6,7 +6,8 @@ import 'package:ecommerce_app/Sellerprofile%20pages/AddProduct/product_provider.
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:ecommerce_app/utils/colors.dart';
+import '../../Utils/Colors.dart';
+//import 'package:ecommerce_app/utils/colors.dart';
 
 class GeneralProduct extends StatefulWidget {
   const GeneralProduct({Key? key}) : super(key: key);
