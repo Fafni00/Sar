@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/UserProfile/UserProflie.dart';
+import 'package:ecommerce_app/UserRegistration/Usermodel.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -16,108 +18,140 @@ class UpdateProfile extends StatefulWidget {
 class _UpdateProfileState extends State<UpdateProfile> {
   final _formkey = GlobalKey<FormState>();
   User? user = FirebaseAuth.instance.currentUser;
-  var name = TextEditingController();
-  var username = TextEditingController();
-  var email = TextEditingController();
-  var contact = TextEditingController();
+  final name = TextEditingController();
+  final username = TextEditingController();
+  final email = TextEditingController();
+  final contact = TextEditingController();
+
+  Widget _textField({
+    TextEditingController? controller,
+    String? label,
+    TextInputType? inputType,
+    int? maxLine,
+  }) {
+    return TextFormField(
+      controller: controller,
+      keyboardType: inputType,
+      maxLines: maxLine,
+      decoration: InputDecoration(
+        label: Text(label!),
+        labelStyle: TextStyle(
+            color: AppColors.buttonColor.withOpacity(0.5), fontSize: 14),
+        contentPadding:
+            EdgeInsets.only(top: 15, bottom: 15, left: 20, right: 20),
+        border: InputBorder.none,
+        fillColor: Colors.white,
+        filled: true,
+        //for focused border
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.vertical(),
+            borderSide: BorderSide(
+              width: 1.0,
+              color: AppColors.textboxColor,
+            )),
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.vertical(),
+            borderSide: BorderSide(
+              width: 2.0,
+              color: AppColors.textboxColor,
+            )),
+      ),
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'enter $label';
+        }
+      },
+    );
+  }
 
   @override
-  void inistate() {}
+  void initState() {
+    UpdateProfile();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: AppColors.buttonColor,
-          automaticallyImplyLeading: false,
-          title: Text(
-            'Edit Profile',
-            style: TextStyle(
-                fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
-          ),
-          leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-                size: 30,
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: ((context) => UserProfile())));
-              }),
-        ),
-        bottomSheet: Container(
-          width: double.infinity,
-          height: 56,
-          color: AppColors.text1Color.withOpacity(0.7),
-          child: Center(
-            child: Text(
-              'Update',
-              style: TextStyle(color: Colors.white, fontSize: 22),
+            backgroundColor: AppColors.buttonColor,
+            automaticallyImplyLeading: false,
+            title: Text(
+              'Edit Profile',
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
             ),
-          ),
-        ),
-        body: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Form(
-                key: _formkey,
-                child: Column(children: [
-                  TextFormField(
-                      controller: name,
-                      decoration: InputDecoration(
-                          labelText: ' Name',
-                          labelStyle: TextStyle(color: AppColors.buttonColor),
-                          contentPadding: EdgeInsets.all(0.8)),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Enter Name';
-                        }
-                        return null;
-                      }),
+            leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                  size: 30,
+                ),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: ((context) => UserProfile())));
+                })),
+        body: Form(
+            key: _formkey,
+            child: Column(
+              children: [
+                SizedBox(height: 40),
+                // name field
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: _textField(
+                      label: ' Enter Name',
+                      inputType: TextInputType.text,
+                      controller: name),
+                ),
+                SizedBox(height: 10),
 
-                  SizedBox(height: 30),
+                // usernamefield
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: _textField(
+                      label: ' Enter UserName',
+                      inputType: TextInputType.text,
+                      controller: username),
+                ),
+                SizedBox(height: 10),
 
-                  //for username
-                  TextFormField(
-                      controller: username,
-                      decoration: InputDecoration(
-                          labelText: 'UserName',
-                          labelStyle: TextStyle(color: AppColors.buttonColor),
-                          contentPadding: EdgeInsets.all(0.8)),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Enter UserName';
-                        }
-                        return null;
-                      }),
+                // email field
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: _textField(
+                      label: ' Enter Email',
+                      inputType: TextInputType.text,
+                      controller: email),
+                ),
+                SizedBox(height: 10),
 
-                  SizedBox(height: 30),
+                // contact field
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: _textField(
+                      label: ' Enter Contact',
+                      inputType: TextInputType.text,
+                      controller: contact),
+                ),
+                SizedBox(height: 10),
 
-                  //for contact
-                  TextFormField(
-                    controller: contact,
-                    decoration: InputDecoration(
-                        labelText: ' Contact',
-                        labelStyle: TextStyle(color: AppColors.buttonColor),
-                        contentPadding: EdgeInsets.all(0.8)),
-                  ),
-
-                  SizedBox(height: 30),
-                  //for email
-                  TextFormField(
-                      controller: email,
-                      decoration: InputDecoration(
-                          labelText: 'Email',
-                          labelStyle: TextStyle(color: AppColors.buttonColor),
-                          contentPadding: EdgeInsets.all(0.8)),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Enter email';
-                        }
-                        return null;
-                      }),
-
-                  SizedBox(height: 30),
-                ]))));
+                Container(
+                  width: 140,
+                  height: 40,
+                  child: TextButton(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              AppColors.buttonbackgroundColor)),
+                      child: Text(
+                        'Update',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      onPressed: () {}),
+                )
+              ],
+            )));
   }
 }

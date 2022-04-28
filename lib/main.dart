@@ -1,10 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:ecommerce_app/Addproduct.dart';
 import 'package:ecommerce_app/Sellerprofile%20pages/AddproductUI/AddProductspage.dart';
 import 'package:ecommerce_app/UserProfile/UserProflie.dart';
 import 'package:ecommerce_app/UserRegistration/UserLogin.dart';
-import 'package:ecommerce_app/Model/productnotifier.dart';
+
 import 'package:ecommerce_app/Sellerprofile%20pages/AllProducts/AllProduct.dart';
 import 'package:ecommerce_app/Sellerprofile%20pages/SellerProfileSection.dart';
 import 'package:ecommerce_app/Sellerprofile%20pages/Sellerprovider.dart';
@@ -24,7 +23,6 @@ Future<void> main() async {
   Provider.debugCheckInvalidValueType = null;
   runApp(
     MultiProvider(providers: [
-      ChangeNotifierProvider(create: (_) => ProductNotifier()),
       Provider<SellerProvider>(create: (_) => SellerProvider()),
       ChangeNotifierProvider(create: (_) => ProductProvider()),
     ], child: MyApp()),
@@ -48,7 +46,6 @@ class MyApp extends StatelessWidget {
         SellerProfileSection.id: (context) => SellerProfileSection(),
         AddProductScreen.id: (context) => AddProductScreen(),
         AllProduct.id: (context) => AllProduct(),
-        //SellerList.id: (context) => SellerList(),
         Loginpage.id: (context) => Loginpage(),
       },
     );

@@ -1,10 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ecommerce_app/Banner/HomeProductList.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:ecommerce_app/category/Category%20Model/Categorymodel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutterfire_ui/firestore.dart';
 
 class CategoryHomepage extends StatefulWidget {
@@ -20,22 +19,31 @@ class _CategoryHomepageState extends State<CategoryHomepage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: const Color(0xFF03C04A),
+        color: const Color(0xFFFAF9F6),
         child: Column(children: [
           const SizedBox(height: 18),
           Padding(
             padding: EdgeInsets.all(8.0),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: Text('Store For You',
-                  style: TextStyle(
-                      color: Colors.white, fontSize: 20, letterSpacing: 1)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Products For You',
+                    style: TextStyle(
+                        color: AppColors.buttonnavigation,
+                        fontSize: 20,
+                        letterSpacing: 1)),
+                TextButton(
+                    onPressed: () {},
+                    child: Text('View More...',
+                        style: TextStyle(
+                            fontSize: 16, color: AppColors.buttonnavigation)))
+              ],
             ),
           ),
           Container(
             height: 3,
             width: MediaQuery.of(context).size.width,
-            color: Colors.white,
+            color: AppColors.buttonnavigation,
             margin: EdgeInsets.only(left: 10, right: 220),
           ),
           Padding(
@@ -75,8 +83,25 @@ class _CategoryHomepageState extends State<CategoryHomepage> {
                               ),
                             );
                           }),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          border: Border(
+                              left: BorderSide(
+                                  color: AppColors.buttonnavigation))),
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.arrow_drop_down,
+                          color: AppColors.buttonnavigation,
+                          size: 35,
+                        ),
+                      ),
                     )
-                  ])))
+                  ]))),
+          HomeProductList(
+            category: _selectedCategory,
+          )
         ]));
   }
 }

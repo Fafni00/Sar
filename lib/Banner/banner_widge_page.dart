@@ -18,7 +18,7 @@ class BannerWigetPage extends StatefulWidget {
 }
 
 class _BannerWigetPageState extends State<BannerWigetPage> {
-  FirebaseService _service = FirebaseService();
+  final FirebaseService _service = FirebaseService();
   double scrollPosition = 0;
   final List _bannerImage = [];
 
@@ -49,7 +49,7 @@ class _BannerWigetPageState extends State<BannerWigetPage> {
           borderRadius: BorderRadius.circular(4),
           child: Container(
             color: AppColors.mainColor.withOpacity(0.2),
-            height: 140,
+            height: 200,
             width: MediaQuery.of(context).size.width,
             child: PageView.builder(
               itemCount: _bannerImage.length,

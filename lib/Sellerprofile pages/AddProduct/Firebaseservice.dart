@@ -75,7 +75,7 @@ class FirebaseService {
   }
 
 //to create datetime format
-  formattedDate(date) {
+  String formattedDate(date) {
     var outputFormat = DateFormat('dd/mm/yyyy hh:mm:aa');
     var outputdate = outputFormat.format(date);
     return outputdate;
