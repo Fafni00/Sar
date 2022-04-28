@@ -1,7 +1,4 @@
-import 'dart:ffi';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:date_time_format/date_time_format.dart';
 
 class Product {
   Product(
@@ -138,11 +135,11 @@ class Product {
   }
 }
 
-productQuery(approved) {
+productQuery({category}) {
   return FirebaseFirestore.instance
       .collection('products')
-      .where('approved', isEqualTo: approved)
-      .orderBy('productName')
+      .where('approved', isEqualTo: true)
+      .where('category', isEqualTo: category)
       .withConverter<Product>(
         fromFirestore: (snapshot, _) => Product.fromJson(snapshot.data()!),
         toFirestore: (product, _) => product.toJson(),
