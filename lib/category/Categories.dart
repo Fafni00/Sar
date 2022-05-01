@@ -55,6 +55,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     query: categoryCollection,
                     itemBuilder: (context, snapshot) {
                       Category category = snapshot.data();
+                      // to get to the selected maincategory after clicking on the corresponding category
                       return InkWell(
                         onTap: () {
                           setState(() {
@@ -79,6 +80,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                     Text(category.categoryName!,
                                         style: TextStyle(
                                           fontSize: 14,
+                                          //to choose the color for the selected Category
                                           color: _selectedCategory ==
                                                   category.categoryName
                                               ? AppColors.buttonbackgroundColor

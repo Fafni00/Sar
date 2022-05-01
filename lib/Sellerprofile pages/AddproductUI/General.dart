@@ -312,7 +312,11 @@ class MainCategoryList extends StatelessWidget {
 class SubCategoryList extends StatelessWidget {
   final String? selectedMainCategory;
   final ProductProvider? provider;
-  const SubCategoryList({this.selectedMainCategory, this.provider, Key? key})
+  const SubCategoryList(
+      {this.selectedMainCategory,
+      this.provider,
+      Key? key,
+      String? selectedSubCategory})
       : super(key: key);
 
   // to add the subcategories after main category has been selecetd in the form

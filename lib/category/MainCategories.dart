@@ -1,10 +1,7 @@
 import 'package:ecommerce_app/category/Category%20Model/MainCategorymodel.dart';
-import 'package:ecommerce_app/category/Category%20Model/SubCategoryModel.dart';
-import 'package:ecommerce_app/category/Productscreen.dart';
 import 'package:ecommerce_app/category/SubCategories.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/firestore.dart';
-import 'package:get/route_manager.dart';
 
 class MainCategories extends StatefulWidget {
   final String? selectedCat;

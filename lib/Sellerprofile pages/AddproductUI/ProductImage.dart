@@ -33,37 +33,48 @@ class _AddProductImageState extends State<AddProductImage>
           padding: EdgeInsets.all(20),
           child: ListView(
             children: [
+              // text button to pick the images from gallery
               TextButton(
                 child: Text('Add Product Image'),
                 onPressed: () {
                   _pickImage().then((value) {
                     var List = value!.forEach((image) {
                       setState(() {
-                        provider.getImageFile(image);
+                        provider.getImageFile(
+                            image); // to save the picked image to the product provider
                       });
                     });
                   });
                 },
               ),
+
+              // to display the selected images
               Center(
                 child: GridView.builder(
-                    shrinkWrap: true,
-                    physics: ScrollPhysics(),
+                    shrinkWrap: true, // to avoid the size error
+                    physics: ScrollPhysics(), // to allow the scrolling
                     itemCount: provider.imageFiles!.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2),
+                        crossAxisCount:
+                            2), // to decide the number of picture to display in the row
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: EdgeInsets.all(20),
                         child: InkWell(
+                            // to make the images clickable
+
                             onLongPress: () {
+                              // to remove the image on longpress
                               setState(() {
                                 provider.imageFiles!.removeAt(index);
                               });
                             },
-                            child: provider.imageFiles == null
+                            child: provider.imageFiles ==
+                                    null // condition to check whether the image has bee picked
                                 ? Container(
-                                    child: Center(child: Text('No Image Add')))
+                                    child: Center(
+                                        child: Text(
+                                            'No Image Add'))) // message to display incase of image not picked
                                 : Image.file(
                                     File(provider.imageFiles![index].path))),
                       );

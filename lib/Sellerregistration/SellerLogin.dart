@@ -4,6 +4,7 @@ import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get_storage/get_storage.dart';
 
 class SellerLoginpage extends StatefulWidget {
   static const String id = 'login-page';
@@ -19,6 +20,7 @@ class _SellerLoginpageState extends State<SellerLoginpage> {
   final _formkey = GlobalKey<FormState>();
   final FirebaseServices _service = FirebaseServices();
   final FirebaseAuth _auths = FirebaseAuth.instance;
+  final box = GetStorage();
 
   //_securetext boolean value for password
   bool _secureText = true;
@@ -247,11 +249,15 @@ class _SellerLoginpageState extends State<SellerLoginpage> {
           .then((uid) => {
                 Fluttertoast.showToast(msg: "Login Successful"),
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: ((context) => Sellernavigation()))),
+                    builder: ((context) => Sellernavigation(
+                          uId: uid.toString(),
+                        )))),
               })
           .catchError((e) {
         Fluttertoast.showToast(msg: e!.message);
       });
+
+      box.write('id', FirebaseAuth.instance.currentUser?.uid.toString());
     }
   }
 }

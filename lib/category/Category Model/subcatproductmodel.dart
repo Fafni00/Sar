@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_app/category/Category%20Model/SubCategoryModel.dart';
 
 class Product {
   Product(
@@ -135,11 +136,10 @@ class Product {
   }
 }
 
-productQuery(approved) {
+productQuery({subCategory}) {
   return FirebaseFirestore.instance
       .collection('products')
-      .where('approved', isEqualTo: approved)
-      .orderBy('productName')
+      .where('subCategory', isEqualTo: subCategory)
       .withConverter<Product>(
         fromFirestore: (snapshot, _) => Product.fromJson(snapshot.data()!),
         toFirestore: (product, _) => product.toJson(),

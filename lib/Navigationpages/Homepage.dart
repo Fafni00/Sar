@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:ecommerce_app/Banner/Categoryforhomepage.dart';
+import 'package:ecommerce_app/Banner/HomeproductModel.dart';
 import 'package:ecommerce_app/Banner/banner_widge_page.dart';
-import 'package:ecommerce_app/Sellerprofile%20pages/AllProducts/Product_model.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/firestore.dart';
@@ -122,7 +122,7 @@ class _HomepageState extends State<Homepage> {
                                     Text('Find Product by Name and Categories'),
                               ),
                               failure: Center(
-                                child: Text('No person found :('),
+                                child: Text('No Product found'),
                               ),
                               filter: (product) => [
                                 product.productName,

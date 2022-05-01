@@ -135,13 +135,13 @@ class Product {
   }
 }
 
-productQuery(approved) {
-  return FirebaseFirestore.instance
-      .collection('products')
-      .where('approved', isEqualTo: approved)
-      .orderBy('productName')
-      .withConverter<Product>(
-        fromFirestore: (snapshot, _) => Product.fromJson(snapshot.data()!),
-        toFirestore: (product, _) => product.toJson(),
-      );
-}
+// productQuery({category, String? subCategory}) {
+//   return FirebaseFirestore.instance
+//       .collection('products')
+//       .where('approved', isEqualTo: true)
+//       .where('category', isEqualTo: category)
+//       .withConverter<Product>(
+//         fromFirestore: (snapshot, _) => Product.fromJson(snapshot.data()!),
+//         toFirestore: (product, _) => product.toJson(),
+//       );
+// }

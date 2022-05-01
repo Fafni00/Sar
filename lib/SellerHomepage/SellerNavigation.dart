@@ -6,7 +6,8 @@ import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:flutter/material.dart';
 
 class Sellernavigation extends StatefulWidget {
-  const Sellernavigation({Key? key}) : super(key: key);
+  String uId;
+  Sellernavigation({Key? key, required this.uId}) : super(key: key);
 
   @override
   State<Sellernavigation> createState() => _SellernavigationState();

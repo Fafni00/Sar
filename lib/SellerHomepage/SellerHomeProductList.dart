@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ecommerce_app/Banner/HomeproductModel.dart';
-import 'package:ecommerce_app/Banner/UserProductDetailScreen.dart';
+import 'package:ecommerce_app/SellerHomepage/SellerProductDetail.dart';
+import 'package:ecommerce_app/SellerHomepage/SellerProductModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/firestore.dart';
 
-class HomeProductList extends StatelessWidget {
+class SellerHomeProductList extends StatelessWidget {
   final String? category;
-  const HomeProductList({Key? key, this.category}) : super(key: key);
+  const SellerHomeProductList({Key? key, this.category}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,8 @@ class HomeProductList extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) => UserProductDetail(
+                          builder: (BuildContext context) =>
+                              SellerProductDetail(
                                 productID: productID,
                                 product: product,
                               )));

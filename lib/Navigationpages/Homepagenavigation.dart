@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:ecommerce_app/Navigationpages/Cart.dart';
+import 'package:ecommerce_app/Cart/Cart.dart';
 import 'package:ecommerce_app/Navigationpages/Homepage.dart';
 import 'package:ecommerce_app/Sellerprofile%20pages/SellerProfileSection.dart';
 import 'package:ecommerce_app/UserProfile/UserProflie.dart';
@@ -19,7 +19,7 @@ class Homepagenavigation extends StatefulWidget {
 }
 
 class _HomepagenavigationState extends State<Homepagenavigation> {
-  List pages = [Homepage(), CategoriesPage(), Cartpage(), UserProfile()];
+  List pages = [Homepage(), CategoriesPage(), UserProfile()];
   int currentIndex = 0;
   void onTap(int index) {
     setState(() {
@@ -40,8 +40,6 @@ class _HomepagenavigationState extends State<Homepagenavigation> {
           BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.home)),
           BottomNavigationBarItem(
               label: 'Categories', icon: Icon(Icons.category)),
-          BottomNavigationBarItem(
-              label: 'Cart', icon: Icon(Icons.shopping_cart)),
           BottomNavigationBarItem(label: 'Profile', icon: Icon(Icons.person)),
         ],
       ),

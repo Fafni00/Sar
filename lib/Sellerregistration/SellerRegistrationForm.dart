@@ -382,6 +382,7 @@ class _SellerRegistrationFormState extends State<SellerRegistrationForm> {
                                 'ownerName': _ownerName.text,
                                 'contactNumber': '+977${_contactNumber.text}',
                                 'emailAddress': _emailAddress.text,
+                                'password': _password.text,
                                 'registrationtype': _Registrationtype,
                                 'panNumber': _panNumber.text,
                                 'vatNumber': _vatNumber.text,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../Sellerregistration/Firebase_service.dart';
 import '../Sellerregistration/SellerModel.dart';
+import 'package:get_storage/get_storage.dart';
 
 class SellerProvider with ChangeNotifier {
   final FirebaseServices _service = FirebaseServices();
@@ -11,9 +12,11 @@ class SellerProvider with ChangeNotifier {
   DocumentSnapshot? doc;
   //this is for the database upload part in addproduct
   Seller? seller;
-
   getsellerData() {
-    _service.seller.doc(_service.user!.uid).get().then((document) {
+    var box = GetStorage();
+    print('output' + box.read('id'));
+    box.write('id', FirebaseAuth.instance.currentUser?.uid);
+    _service.seller.doc(box.read('id')).get().then((document) {
       doc = document;
       print(doc.toString());
       //to upload the seller information while adding the product in the database
