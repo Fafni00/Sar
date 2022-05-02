@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:ecommerce_app/Sellerprofile%20pages/AddproductUI/AddProductspage.dart';
+import 'package:ecommerce_app/Sellerprofile%20pages/ViewOrder.dart';
 import 'package:ecommerce_app/UserProfile/UserProflie.dart';
 import 'package:ecommerce_app/UserRegistration/UserLogin.dart';
 
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
         AddProductScreen.id: (context) => AddProductScreen(),
         AllProduct.id: (context) => AllProduct(),
         Loginpage.id: (context) => Loginpage(),
+        ProductOrder.id: (context) => ProductOrder()
       },
     );
   }

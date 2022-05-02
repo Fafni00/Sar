@@ -53,137 +53,193 @@ class _UserProfileState extends State<UserProfile> {
           ),
         ),
         body: Center(
-            child: Column(
-          children: [
-            Container(
-              child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('My Account',
-                      style: TextStyle(
-                        fontSize: 40,
-                        color: AppColors.text1Color,
-                      ))),
-            ),
-            Stack(
-              children: [
-                Container(
-                  color: const Color(0xFFe2efdd),
-                  child: Row(children: [
-                    CircleAvatar(
-                        radius: 40,
-                        backgroundColor: AppColors.buttonColor,
-                        child: Text('U',
-                            style: TextStyle(
-                              fontSize: 30,
-                              color: Colors.white,
-                            ))),
-                    SizedBox(
-                      width: 60,
-                    ),
-                    Column(
-                      children: [
-                        Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              height: 70,
-                              child: Column(children: [
-                                Text('${loggedInUser.name}',
-                                    style: TextStyle(
-                                      fontSize: 30,
-                                      color: AppColors.text1Color,
-                                    )),
-                                Text(
-                                  '${loggedInUser.email}',
+            child: Column(children: [
+          Container(
+            child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('My Account',
+                    style: TextStyle(
+                      fontSize: 40,
+                      color: AppColors.text1Color,
+                    ))),
+          ),
+          Stack(
+            children: [
+              Container(
+                color: const Color(0xFFe2efdd),
+                child: Row(children: [
+                  CircleAvatar(
+                      radius: 40,
+                      backgroundColor: AppColors.buttonColor,
+                      child: Text('U',
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.white,
+                          ))),
+                  SizedBox(
+                    width: 60,
+                  ),
+                  Column(
+                    children: [
+                      Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: 70,
+                            child: Column(children: [
+                              Text('${loggedInUser.name}',
                                   style: TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 30,
                                     color: AppColors.text1Color,
-                                  ),
+                                  )),
+                              Text(
+                                '${loggedInUser.email}',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: AppColors.text1Color,
                                 ),
-                              ]),
-                            )),
-                      ],
-                    )
-                  ]),
-                ),
+                              ),
+                            ]),
+                          )),
+                    ],
+                  )
+                ]),
+              ),
 
-                // to show the View order page
-                Positioned(
-                    right: 10.0,
-                    //top: 10.0,
-                    child: IconButton(
-                      icon: Icon(Icons.edit_outlined,
-                          color: AppColors.buttonbackgroundColor),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: ((context) => UpdateProfile())));
-                      },
-                    )),
-              ],
-            ),
-            // to show the cartpage
-            SizedBox(height: 30),
-            Column(children: [
-              Row(
-                children: [
+              // to show the View order page
+              Positioned(
+                  right: 10.0,
+                  //top: 10.0,
+                  child: IconButton(
+                    icon: Icon(Icons.edit_outlined,
+                        color: AppColors.buttonbackgroundColor),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: ((context) => UpdateProfile())));
+                    },
+                  )),
+            ],
+          ),
+          // to show the cartpage
+          SizedBox(height: 30),
+          Column(children: [
+            Row(children: [
+              Row(children: [
+                InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext) => ViewOrder()));
+                    },
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(
+                                left: 40, bottom: 20, right: 100),
+                            height: 120,
+                            width: 100,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image:
+                                        AssetImage("assets/images/Receipt.png"),
+                                    fit: BoxFit.cover),
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(6),
+                                boxShadow: [
+                                  BoxShadow(
+                                      blurRadius: 1,
+                                      offset: Offset(3, 3),
+                                      color: Colors.grey.withOpacity(0.4)),
+                                  BoxShadow(
+                                    blurRadius: 1,
+                                    offset: Offset(-3, -3),
+                                    color: Colors.grey.withOpacity(0.4),
+                                  ),
+                                ]),
+                          ),
+                          SizedBox(height: 4),
+                          Container(
+                              margin: EdgeInsets.only(
+                                  left: 50, bottom: 20, right: 10),
+                              child: Text(
+                                'My Order',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Color(0xFF056608),
+                                ),
+                              )),
+                        ])),
+
+                // to show the cartpage
+                SizedBox(height: 30),
+                Column(children: [
                   Row(
                     children: [
-                      InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext) => ViewOrder()));
-                          },
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(
-                                      left: 40, bottom: 20, right: 100),
-                                  height: 120,
-                                  width: 100,
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                              "assets/images/Receipt.png"),
-                                          fit: BoxFit.cover),
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(6),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            blurRadius: 1,
-                                            offset: Offset(3, 3),
-                                            color:
-                                                Colors.grey.withOpacity(0.4)),
-                                        BoxShadow(
-                                          blurRadius: 1,
-                                          offset: Offset(-3, -3),
-                                          color: Colors.grey.withOpacity(0.4),
-                                        ),
-                                      ]),
-                                ),
-                                SizedBox(height: 4),
-                                Container(
-                                    margin: EdgeInsets.only(
-                                        left: 50, bottom: 20, right: 10),
-                                    child: Text(
-                                      'My Order',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Color(0xFF056608),
-                                      ),
-                                    )),
-                              ])),
+                      Row(
+                        children: [
+                          InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext) =>
+                                            ViewOrder()));
+                              },
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      margin:
+                                          EdgeInsets.only(left: 10, bottom: 20),
+                                      height: 120,
+                                      width: 100,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  "assets/images/chat.png"),
+                                              fit: BoxFit.cover),
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                blurRadius: 1,
+                                                offset: Offset(3, 3),
+                                                color: Colors.grey
+                                                    .withOpacity(0.4)),
+                                            BoxShadow(
+                                              blurRadius: 1,
+                                              offset: Offset(-3, -3),
+                                              color:
+                                                  Colors.grey.withOpacity(0.4),
+                                            ),
+                                          ]),
+                                    ),
+                                    SizedBox(height: 4),
+                                    Container(
+                                        margin: EdgeInsets.only(
+                                            left: 25, bottom: 20),
+                                        child: Text(
+                                          'Queries',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            color: Color(0xFF056608),
+                                          ),
+                                        )),
+                                  ])),
+                        ],
+                      ),
+                      SizedBox(width: 5),
                     ],
                   ),
-                  SizedBox(width: 5),
-                ],
-              ),
-            ]),
-          ],
-        )));
+                ]),
+              ])
+            ])
+          ])
+        ])));
   }
 
   //get userdetails

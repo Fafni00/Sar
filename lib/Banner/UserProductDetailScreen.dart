@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_app/Banner/HomeproductModel.dart';
 import 'package:ecommerce_app/Banner/ProductBottomsheet.dart';
+import 'package:ecommerce_app/Cart/Cart.dart';
+import 'package:ecommerce_app/Navigationpages/Homepagenavigation.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:ecommerce_app/category/Firebase_service.dart';
 import 'package:flutter/material.dart';
@@ -241,12 +243,21 @@ class _UserProductDetailState extends State<UserProductDetail> {
             children: [
               SizedBox(width: 10),
               //to go to homepage
-              Column(
-                children: [
-                  Icon(Icons.home_filled, color: AppColors.buttonnavigation),
-                  Text('Home',
-                      style: TextStyle(color: AppColors.buttonnavigation)),
-                ],
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              Homepagenavigation()));
+                },
+                child: Column(
+                  children: [
+                    Icon(Icons.home_filled, color: AppColors.buttonnavigation),
+                    Text('Home',
+                        style: TextStyle(color: AppColors.buttonnavigation)),
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -255,12 +266,15 @@ class _UserProductDetailState extends State<UserProductDetail> {
               SizedBox(width: 20),
 
               //to add Queries
-              Column(
-                children: [
-                  Icon(Icons.chat, color: AppColors.buttonnavigation),
-                  Text('Query',
-                      style: TextStyle(color: AppColors.buttonnavigation)),
-                ],
+              InkWell(
+                onTap: () {},
+                child: Column(
+                  children: [
+                    Icon(Icons.chat, color: AppColors.buttonnavigation),
+                    Text('Query',
+                        style: TextStyle(color: AppColors.buttonnavigation)),
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),

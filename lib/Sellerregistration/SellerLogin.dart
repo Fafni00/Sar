@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/SellerHomepage/SellerNavigation.dart';
 import 'package:ecommerce_app/Sellerregistration/Firebase_service.dart';
+import 'package:ecommerce_app/UserRegistration/UserLogin.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -163,8 +164,20 @@ class _SellerLoginpageState extends State<SellerLoginpage> {
               image: AssetImage("assets/images/Decor1.png"), fit: BoxFit.cover),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            AppBar(
+              toolbarHeight: 30,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back,
+                    color: AppColors.buttonbackgroundColor),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: ((context) => Loginpage())));
+                },
+              ),
+            ),
             Container(
               margin: EdgeInsets.only(bottom: 10),
             ),
@@ -188,7 +201,7 @@ class _SellerLoginpageState extends State<SellerLoginpage> {
             Container(
               margin: EdgeInsets.only(top: 10, bottom: 30),
             ),
-            Text('Welcome',
+            Text('Welcome To Your Store',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -198,7 +211,7 @@ class _SellerLoginpageState extends State<SellerLoginpage> {
             Container(
               child: Container(
                 height: 5,
-                width: 220,
+                width: 300,
                 color: Colors.white,
               ),
             ),

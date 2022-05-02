@@ -3,6 +3,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_app/Sellerprofile%20pages/AddProduct/product_provider.dart';
 import 'package:ecommerce_app/Sellerprofile%20pages/AddproductUI/AddProductspage.dart';
+import 'package:ecommerce_app/Sellerprofile%20pages/ViewOrder.dart';
 import 'package:ecommerce_app/UserRegistration/UserLogin.dart';
 import 'package:ecommerce_app/Sellerprofile%20pages/AllProducts/AllProduct.dart';
 import 'package:ecommerce_app/Sellerprofile%20pages/SellerProfileSection.dart';
@@ -90,7 +91,11 @@ class SellerDrawer extends StatelessWidget {
                       menuTitle: 'Add Product',
                       icon: Icons.add_shopping_cart,
                       route: AddProductScreen.id),
-                ])
+                ]),
+            _menu(
+                menuTitle: 'View Order',
+                icon: Icons.receipt,
+                route: ProductOrder.id),
           ],
         ),
       ),

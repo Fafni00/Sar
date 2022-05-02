@@ -250,22 +250,33 @@ class _LoginpageState extends State<Loginpage> {
 
         //login as seller
         // code to create clickable texts
-        RichText(
-            text: TextSpan(
-                text: "Are You a Seller?",
-                style: TextStyle(color: Colors.black, fontSize: 15),
-                children: [
-              TextSpan(
+        Container(
+            height: 40,
+            width: 160,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+                color: AppColors.textboxColor,
+                borderRadius: BorderRadius.circular(4),
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 2,
+                    offset: Offset(2, 2),
+                    color: Colors.grey.withOpacity(0.3),
+                  ),
+                ]),
+            child: RichText(
+              text: TextSpan(
                 recognizer: TapGestureRecognizer()
                   ..onTap = () => Get.to(() => SellerLoginpage()),
-                text: "Seller Login",
-                style: TextStyle(color: AppColors.text1Color, fontSize: 18),
+                text: " Login as Seller",
+                style: TextStyle(color: AppColors.text1Color, fontSize: 20),
               ),
-            ])),
+            )),
 
         SizedBox(
           height: 10,
         ),
+
         // code to create clickable texts
         RichText(
             text: TextSpan(

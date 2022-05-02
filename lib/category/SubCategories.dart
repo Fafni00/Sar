@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:ecommerce_app/category/Category%20Model/SubCategoryModel.dart';
-import 'package:ecommerce_app/category/SubCatProduct.dart';
+import 'package:ecommerce_app/category/subcatgorylist.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/firestore.dart';
@@ -45,7 +45,8 @@ class _SubCategoriesState extends State<SubCategories> {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    SubCatProduct()));
+                                    SubProductList(
+                                        subCategory: subcat.subCategoryName!)));
                       },
                       child: Container(
                         height: 50,

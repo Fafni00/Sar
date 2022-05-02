@@ -320,8 +320,8 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
         // code for the background picture and Text on the top of the screen
         Container(
           // inserting background picture and adjusting its size
-          height: 190,
-          width: 400,
+          height: 200,
+          width: 440,
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/Decor2.png"),
