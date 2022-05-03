@@ -21,8 +21,8 @@ class ProductBottomSheet extends StatelessWidget {
             child: Row(
               children: [
                 Icon(Icons.circle, color: AppColors.buttonnavigation, size: 17),
-                SizedBox(width: 10),
-                Text(details!, style: TextStyle(fontSize: 17)),
+                const SizedBox(width: 10),
+                Text(details!, style: const TextStyle(fontSize: 17)),
               ],
             ),
           ),
@@ -30,7 +30,7 @@ class ProductBottomSheet extends StatelessWidget {
       ));
     }
 
-    return Container(
+    return SizedBox(
         height: 500,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,12 +38,13 @@ class ProductBottomSheet extends StatelessWidget {
             AppBar(
               backgroundColor: AppColors.buttonnavigation,
               automaticallyImplyLeading: false,
-              title: Text('Specifications', style: TextStyle(fontSize: 20)),
+              title:
+                  const Text('Specifications', style: TextStyle(fontSize: 20)),
               centerTitle: true,
               actions: [
                 IconButton(
                     onPressed: () => Navigator.pop(context),
-                    icon: Icon(Icons.close)),
+                    icon: const Icon(Icons.close)),
               ],
             ),
             Padding(
@@ -51,9 +52,9 @@ class ProductBottomSheet extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (product!.sku != null) SizedBox(width: 10),
+                  if (product!.sku != null) const SizedBox(width: 10),
                   _customContainer(head: 'SKU', details: product!.sku),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   if (product!.unit != null)
                     _customContainer(head: 'Unit', details: product!.unit),
                 ],

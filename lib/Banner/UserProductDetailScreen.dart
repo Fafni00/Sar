@@ -41,33 +41,33 @@ class _UserProductDetailState extends State<UserProductDetail> {
     return Scaffold(
       appBar: AppBar(
           backgroundColor: AppColors.buttonnavigation,
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: const IconThemeData(color: Colors.white),
           title: Text(widget.product!.productName!),
           actions: [
             CircleAvatar(
                 backgroundColor: const Color(0xFFe2efdd).withOpacity(0.3),
                 radius: 17,
-                child: Icon(
+                child: const Icon(
                   Icons.shopping_cart,
                   color: Colors.white,
                 )),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             CircleAvatar(
                 backgroundColor: const Color(0xFFe2efdd).withOpacity(0.3),
                 radius: 17,
-                child: Icon(
+                child: const Icon(
                   Icons.more_horiz,
                   color: Colors.white,
                 )),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
           ]),
       body: SafeArea(
         child: SingleChildScrollView(
             child: Column(
           children: [
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             //to show product image
-            Container(
+            SizedBox(
               height: 200,
               child: Stack(
                 children: [
@@ -85,13 +85,13 @@ class _UserProductDetailState extends State<UserProductDetail> {
                 ],
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             //to show product Name
             Text(widget.product!.productName!,
                 style:
                     TextStyle(fontSize: 19, color: AppColors.buttonnavigation)),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             //to show product price
             Padding(
@@ -106,7 +106,7 @@ class _UserProductDetailState extends State<UserProductDetail> {
                 ],
               ),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
 
             Divider(color: AppColors.buttonnavigation),
             // to show storeName
@@ -129,7 +129,7 @@ class _UserProductDetailState extends State<UserProductDetail> {
 
             Divider(color: AppColors.buttonnavigation),
 
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             // to show product decsription
             Container(
               alignment: Alignment.topLeft,
@@ -137,11 +137,11 @@ class _UserProductDetailState extends State<UserProductDetail> {
                   style: TextStyle(
                       fontSize: 20, color: AppColors.buttonnavigation)),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(widget.product!.description!,
-                style: TextStyle(fontSize: 16, color: Colors.black)),
+                style: const TextStyle(fontSize: 16, color: Colors.black)),
 
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             // to show size list
             if (widget.product!.sizeList != null &&
@@ -149,7 +149,7 @@ class _UserProductDetailState extends State<UserProductDetail> {
               Column(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(right: 340),
+                    margin: const EdgeInsets.only(right: 340),
                     child: Text('Size :',
                         style: TextStyle(
                             fontSize: 20, color: AppColors.buttonnavigation)),
@@ -188,7 +188,7 @@ class _UserProductDetailState extends State<UserProductDetail> {
                   ),
                 ],
               ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             // to show specification
             Container(
               height: 40,
@@ -206,7 +206,7 @@ class _UserProductDetailState extends State<UserProductDetail> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Specifications',
+                    const Text('Specifications',
                         style: TextStyle(fontSize: 16, color: Colors.black)),
                     Icon(
                       Icons.arrow_forward_ios,
@@ -216,7 +216,7 @@ class _UserProductDetailState extends State<UserProductDetail> {
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             // to show additional details.
             Container(
@@ -225,65 +225,69 @@ class _UserProductDetailState extends State<UserProductDetail> {
                   style: TextStyle(
                       fontSize: 20, color: AppColors.buttonnavigation)),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(widget.product!.additionalDetail!,
-                style: TextStyle(fontSize: 16, color: Colors.black)),
-            SizedBox(height: 20),
+                style: const TextStyle(fontSize: 16, color: Colors.black)),
+            const SizedBox(height: 20),
           ],
         )),
       ),
       // to create the are that hold home, query and add to cart button
       bottomSheet: Container(
-          decoration: BoxDecoration(
-              border: Border(
-            top: BorderSide(color: AppColors.buttonnavigation),
-          )),
-          height: 50,
-          child: Row(
-            children: [
-              SizedBox(width: 10),
-              //to go to homepage
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              Homepagenavigation()));
-                },
-                child: Column(
-                  children: [
-                    Icon(Icons.home_filled, color: AppColors.buttonnavigation),
-                    Text('Home',
-                        style: TextStyle(color: AppColors.buttonnavigation)),
-                  ],
-                ),
+        decoration: BoxDecoration(
+            border: Border(
+          top: BorderSide(color: AppColors.buttonnavigation),
+        )),
+        height: 50,
+        child: Row(
+          children: [
+            const SizedBox(width: 10),
+            //to go to homepage
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            const Homepagenavigation()));
+              },
+              child: Column(
+                children: [
+                  Icon(Icons.home_filled, color: AppColors.buttonnavigation),
+                  Text('Home',
+                      style: TextStyle(color: AppColors.buttonnavigation)),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: VerticalDivider(color: AppColors.buttonnavigation),
-              ),
-              SizedBox(width: 20),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: VerticalDivider(color: AppColors.buttonnavigation),
+            ),
+            const SizedBox(width: 20),
 
-              //to add Queries
-              InkWell(
-                onTap: () {},
-                child: Column(
-                  children: [
-                    Icon(Icons.chat, color: AppColors.buttonnavigation),
-                    Text('Query',
-                        style: TextStyle(color: AppColors.buttonnavigation)),
-                  ],
-                ),
+            //to add Queries
+            InkWell(
+              onTap: () {},
+              child: Column(
+                children: [
+                  Icon(Icons.chat, color: AppColors.buttonnavigation),
+                  Text('Query',
+                      style: TextStyle(color: AppColors.buttonnavigation)),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: VerticalDivider(color: AppColors.buttonnavigation),
-              ),
-              SizedBox(width: 20),
-              Cartpage(product: widget.product),
-            ],
-          )),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: VerticalDivider(color: AppColors.buttonnavigation),
+            ),
+            const SizedBox(width: 20),
+            CartPage(
+              product: widget.product,
+              productId: widget.productID ?? '',
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
