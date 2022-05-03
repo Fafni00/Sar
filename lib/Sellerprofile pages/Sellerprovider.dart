@@ -5,18 +5,20 @@ import '../Sellerregistration/Firebase_service.dart';
 import '../Sellerregistration/SellerModel.dart';
 
 class SellerProvider with ChangeNotifier {
-  final FirebaseServices _service = FirebaseServices();
+  //final FirebaseServices _service = FirebaseServices();
   CollectionReference sellerRef =
       FirebaseFirestore.instance.collection('seller');
-  User? user = FirebaseAuth.instance.currentUser;
+  //User? user = FirebaseAuth.instance.currentUser;
   DocumentSnapshot? doc;
   //this is for the database upload part in addproduct
   Seller? seller;
+
   getsellerData() async {
     //print(_service.user!.uid);
-    print(_service.user!.uid);
+    User? user = FirebaseAuth.instance.currentUser;
+    print(user!.uid);
     print("Receiving seller data");
-    doc = await sellerRef.doc(_service.user!.uid).get();
+    doc = await sellerRef.doc(user!.uid).get();
     print(doc!.data());
     seller = Seller.fromJson(doc!.data() as Map<String, dynamic>);
     print(seller!.storeName);

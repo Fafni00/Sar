@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_app/Sellerprofile%20pages/AddProduct/product_provider.dart';
 import 'package:ecommerce_app/Sellerprofile%20pages/AddproductUI/AddProductspage.dart';
 import 'package:ecommerce_app/Sellerprofile%20pages/ViewOrder.dart';
+import 'package:ecommerce_app/Sellerregistration/SellerLogin.dart';
 import 'package:ecommerce_app/UserRegistration/UserLogin.dart';
 import 'package:ecommerce_app/Sellerprofile%20pages/AllProducts/AllProduct.dart';
 import 'package:ecommerce_app/Sellerprofile%20pages/SellerProfileSection.dart';
@@ -109,9 +110,8 @@ class SellerDrawer extends StatelessWidget {
             _signOut();
             //final _sellerData = Provider.of<SellerProvider>(context);
             _sellerData.resetSellerData();
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: ((context) => Loginpage())));
-            //Navigator.pushReplacementNamed(context, Loginpage.id);
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => Loginpage()));
           }),
     ]));
   }
