@@ -20,4 +20,8 @@ class SellerProvider with ChangeNotifier {
       notifyListeners();
     });
   }
+
+  Seller? getSeller() {
+    return seller;
+  }
 }
