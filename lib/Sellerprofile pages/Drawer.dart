@@ -106,9 +106,20 @@ class SellerDrawer extends StatelessWidget {
             color: Color(0xFF056608),
           ),
           onTap: () {
-            FirebaseAuth.instance.signOut();
-            Navigator.pushReplacementNamed(context, Loginpage.id);
+            _signOut();
+            //final _sellerData = Provider.of<SellerProvider>(context);
+            _sellerData.resetSellerData();
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: ((context) => Loginpage())));
+            //Navigator.pushReplacementNamed(context, Loginpage.id);
           }),
     ]));
+  }
+
+  _signOut() async {
+    await FirebaseAuth.instance.signOut();
+    User? user = FirebaseAuth.instance.currentUser;
+    print('Current User ');
+    print(user?.uid);
   }
 }

@@ -1,14 +1,15 @@
 class Seller {
-  Seller(
-      {this.approved,
-      this.storeName,
-      this.storeImage,
-      this.ownerName,
-      this.address,
-      this.contactNumber,
-      this.emailAddress,
-      this.registrationtype,
-      this.uid});
+  Seller({
+    this.approved,
+    this.storeName,
+    this.storeImage,
+    this.ownerName,
+    this.address,
+    this.contactNumber,
+    this.emailAddress,
+    this.registrationtype,
+    //this.uid
+  });
 
   Seller.fromJson(Map<String, Object?> json)
       : this(
@@ -20,7 +21,7 @@ class Seller {
           contactNumber: json['contactNumber']! as String,
           emailAddress: json['emailAddress']! as String,
           registrationtype: json['registrationtype']! as String,
-          uid: json['uid']! as String,
+          //uid: json['uid'] as String,
         );
 
   final bool? approved;
@@ -31,7 +32,7 @@ class Seller {
   final String? contactNumber;
   final String? emailAddress;
   final String? registrationtype;
-  final String? uid;
+  //final String? uid;
 
   Map<String, Object?> toJson() {
     return {
@@ -43,7 +44,7 @@ class Seller {
       'contactNumber': contactNumber,
       'emailAddress': emailAddress,
       'registrationtype': registrationtype,
-      'uid': uid
+      //'uid': uid
     };
   }
 }

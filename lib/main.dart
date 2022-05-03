@@ -20,11 +20,10 @@ import 'Sellerprofile pages/AddProduct/product_provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await GetStorage.init();
   Provider.debugCheckInvalidValueType = null;
   runApp(
     MultiProvider(providers: [
-      Provider<SellerProvider>(create: (_) => SellerProvider()),
+      ChangeNotifierProvider(create: (_) => SellerProvider()),
       ChangeNotifierProvider(create: (_) => ProductProvider()),
     ], child: MyApp()),
   );

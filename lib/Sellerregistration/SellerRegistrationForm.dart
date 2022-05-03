@@ -7,7 +7,6 @@ import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -363,9 +362,9 @@ class _SellerRegistrationFormState extends State<SellerRegistrationForm> {
                             _scaffold('Shop Image not Selecetd');
                             return;
                           }
+                          User? currentUser = FirebaseAuth.instance.currentUser;
 
                           if (_formKey.currentState!.validate()) {
-                            EasyLoading.show(status: 'Please wait..');
                             _service
                                 .uploadImage(_storeImage,
                                     'seller/${_service.user?.uid}/__shopImage')
@@ -388,9 +387,8 @@ class _SellerRegistrationFormState extends State<SellerRegistrationForm> {
                                 'vatNumber': _vatNumber.text,
                                 'address': _address.text,
                                 'approved': false,
-                                'uid': _service.user?.uid
+                                'uid': currentUser?.uid
                               }).then((value) {
-                                EasyLoading.dismiss();
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(SnackBar(
                                         content: Text(

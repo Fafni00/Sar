@@ -281,7 +281,7 @@ class _UserProductDetailState extends State<UserProductDetail> {
                 child: VerticalDivider(color: AppColors.buttonnavigation),
               ),
               SizedBox(width: 20),
-              //Cartpage(),
+              Cartpage(product: widget.product),
             ],
           )),
     );

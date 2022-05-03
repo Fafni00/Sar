@@ -17,7 +17,8 @@ class SellerProfileSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _sellerData = Provider.of<SellerProvider>(context);
-    if (_sellerData.doc == null) {
+    if (_sellerData.seller == null) {
+      print("Reading the seller data");
       _sellerData.getsellerData();
     }
     return Scaffold(
@@ -54,8 +55,8 @@ class SellerProfileSection extends StatelessWidget {
                       //to show the Store Name
                       Container(
                         margin: EdgeInsets.only(
-                          right: 20,
-                          left: 20,
+                          right: 16,
+                          left: 16,
                         ),
                         decoration: BoxDecoration(
                             color: Colors.white,

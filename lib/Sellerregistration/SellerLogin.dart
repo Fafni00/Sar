@@ -21,7 +21,6 @@ class _SellerLoginpageState extends State<SellerLoginpage> {
   final _formkey = GlobalKey<FormState>();
   final FirebaseServices _service = FirebaseServices();
   final FirebaseAuth _auths = FirebaseAuth.instance;
-  final box = GetStorage();
 
   //_securetext boolean value for password
   bool _secureText = true;
@@ -262,15 +261,11 @@ class _SellerLoginpageState extends State<SellerLoginpage> {
           .then((uid) => {
                 Fluttertoast.showToast(msg: "Login Successful"),
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: ((context) => Sellernavigation(
-                          uId: uid.toString(),
-                        )))),
+                    builder: ((context) => Sellernavigation()))),
               })
           .catchError((e) {
         Fluttertoast.showToast(msg: e!.message);
       });
-
-      box.write('id', FirebaseAuth.instance.currentUser?.uid.toString());
     }
   }
 }

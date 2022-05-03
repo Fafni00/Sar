@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ecommerce_app/Cart/CartProducModel.dart';
+import 'package:ecommerce_app/Banner/HomeproductModel.dart';
 import 'package:ecommerce_app/Cart/Cartservices.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +8,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class Cartpage extends StatefulWidget {
   final Product? product;
-  Cartpage(this.product);
+  Cartpage({this.product});
 
   @override
   State<Cartpage> createState() => _CartpageState();
@@ -17,6 +17,7 @@ class Cartpage extends StatefulWidget {
 class _CartpageState extends State<Cartpage> {
   final CartServices _cart = CartServices();
   User? user = FirebaseAuth.instance.currentUser;
+  bool _loading = true;
 
   @override
   void initState() {
@@ -25,16 +26,30 @@ class _CartpageState extends State<Cartpage> {
   }
 
   getCartData() async {
-    _cart.cart.doc(user?.uid);
+    final snapshot =
+        await _cart.cart.doc(user!.uid).collection('products').get();
   }
 
   @override
   Widget build(BuildContext context) {
+    // to get the product qty detail
+    // FirebaseFirestore.instance
+    // .collection('cart')
+    // .doc(user!.uid)
+    // .collection('products').where('productId', isEqualTo:widget.document.data()['productID'])
+    // .get()
+    // .then((QuerySnapshot querySnapshot) {
+    //     querySnapshot.docs.forEach((doc) {
+    //         print(doc["productID"]);
+    //     });
+    // });
+
+    // to show progressindicator while product is loading
     return InkWell(
       onTap: (() {
-        EasyLoading.show(status: 'Adding to Cart');
-        _cart.addToCart().then((value) {
-          EasyLoading.showSuccess('Product Added Successfully');
+        print('adding product');
+        _cart.addToCart(data: widget.product).then((value) {
+          print('Product Added Successfully');
         });
       }),
       child: Container(
