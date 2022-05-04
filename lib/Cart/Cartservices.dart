@@ -11,14 +11,63 @@ class CartServices {
   // }
 
   Future<void> addToCart({Product? product, String? productId}) {
-    cart.doc(user!.uid).set({
-      'user': user!.uid,
+    cart.doc(user?.uid).set({
+      'user': user?.uid,
     });
-    return cart.doc(user!.uid).collection('products').add({
+    return cart.doc(user?.uid).collection('products').add({
       'productId': productId,
-      'productName': product?.productName,
-      'storeName': product?.storeName,
-      'sizeList': product?.sizeList,
+      'productName': product!.productName,
+      'price': product.regularPrice,
+      'storeName': product.storeName,
+      'qty': 1,
+      'total': product.regularPrice,
     });
+  }
+
+  Future<void> updateCartQty(
+    docId,
+    qty,
+    /*total*/
+  ) async {
+    DocumentReference documentReference = FirebaseFirestore.instance
+        .collection('cart')
+        .doc(user!.uid)
+        .collection('product')
+        .doc(docId);
+
+    return FirebaseFirestore.instance
+        .runTransaction((transaction) async {
+          // Get the document
+          DocumentSnapshot snapshot = await transaction.get(documentReference);
+
+          if (!snapshot.exists) {
+            throw Exception("Product does not exist in Cart");
+          }
+          transaction.update(documentReference, {
+            'qty': qty,
+            //'total': total,
+          });
+
+          // Return the new count
+          return qty;
+        })
+        .then((value) => print("Cart Updated"))
+        .catchError((error) => print("Failed to update user cart: $error"));
+  }
+
+  Future<void> removeFromCart(docId) async {
+    cart.doc(user!.uid).collection('products').doc(docId).delete();
+  }
+
+  Future<void> checkData() async {
+    final snapshot = await cart.doc(user!.uid).collection('products').get();
+    if (snapshot.docs.isEmpty) {
+      cart.doc(user!.uid).delete();
+    }
+  }
+
+  Future<DocumentSnapshot> getStoreName() async {
+    DocumentSnapshot doc = await cart.doc(user!.uid).get();
+    return doc;
   }
 }

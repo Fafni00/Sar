@@ -18,7 +18,7 @@ class SellerProvider with ChangeNotifier {
     User? user = FirebaseAuth.instance.currentUser;
     print(user!.uid);
     print("Receiving seller data");
-    doc = await sellerRef.doc(user!.uid).get();
+    doc = await sellerRef.doc(user.uid).get();
     print(doc!.data());
     seller = Seller.fromJson(doc!.data() as Map<String, dynamic>);
     print(seller!.storeName);

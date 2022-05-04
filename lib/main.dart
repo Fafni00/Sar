@@ -1,5 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:ecommerce_app/Banner/HomeProductList.dart';
+import 'package:ecommerce_app/Banner/UserProductDetailScreen.dart';
+import 'package:ecommerce_app/Cart/Cart.dart';
+import 'package:ecommerce_app/Cart/Counter_widget.dart';
+import 'package:ecommerce_app/Cart/cartprovider.dart';
+import 'package:ecommerce_app/Cart/CartScreen.dart';
+import 'package:ecommerce_app/Navigationpages/Homepagenavigation.dart';
 import 'package:ecommerce_app/Sellerprofile%20pages/AddproductUI/AddProductspage.dart';
 import 'package:ecommerce_app/Sellerprofile%20pages/ViewOrder.dart';
 import 'package:ecommerce_app/UserProfile/UserProflie.dart';
@@ -25,6 +32,7 @@ Future<void> main() async {
     MultiProvider(providers: [
       ChangeNotifierProvider(create: (_) => SellerProvider()),
       ChangeNotifierProvider(create: (_) => ProductProvider()),
+      ChangeNotifierProvider(create: (_) => CartProvider()),
     ], child: MyApp()),
   );
 }
@@ -47,7 +55,8 @@ class MyApp extends StatelessWidget {
         AddProductScreen.id: (context) => AddProductScreen(),
         AllProduct.id: (context) => AllProduct(),
         Loginpage.id: (context) => Loginpage(),
-        ProductOrder.id: (context) => ProductOrder()
+        ProductOrder.id: (context) => ProductOrder(),
+        CartScreen.id: (context) => CartScreen(),
       },
     );
   }

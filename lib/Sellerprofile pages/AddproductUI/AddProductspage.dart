@@ -24,6 +24,7 @@ class AddProductScreen extends StatefulWidget {
 
 class _AddProductScreenState extends State<AddProductScreen> {
   final _formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final _provider = Provider.of<ProductProvider>(context);
@@ -86,7 +87,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               return;
                             }
                             if (_formkey.currentState!.validate()) {
-                              EasyLoading.show(status: 'Please Wait...');
                               //to get the formdata save in productprovider
                               _provider.getFormData(vendor: {
                                 'name': _seller.seller!.storeName,
@@ -108,7 +108,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                             data: _provider.productData,
                                             context: context)
                                         .then((value) {
-                                      EasyLoading.dismiss();
                                       setState(() {
                                         _provider.clearProductData();
                                       });

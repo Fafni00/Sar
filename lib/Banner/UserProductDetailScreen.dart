@@ -7,6 +7,8 @@ import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:ecommerce_app/category/Firebase_service.dart';
 import 'package:flutter/material.dart';
 
+import '../Cart/CartNotification.dart';
+
 class UserProductDetail extends StatefulWidget {
   final Product? product;
   final String? productID;
@@ -29,7 +31,7 @@ class _UserProductDetailState extends State<UserProductDetail> {
   }
 
   getSize() {
-    if (widget.product!.sizeList != null) {
+    if (widget.product?.sizeList != null) {
       setState(() {
         _selectedSize = widget.product!.sizeList![0];
       });
