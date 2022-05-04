@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_app/Sellerprofile%20pages/AddProduct/Firebaseservice.dart';
-import 'package:ecommerce_app/Sellerprofile%20pages/AllProducts/ProductCard.dart';
+import 'package:ecommerce_app/Sellerprofile%20pages/AllProducts/Productcard.dart';
 import 'package:ecommerce_app/Sellerprofile%20pages/AllProducts/Product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
