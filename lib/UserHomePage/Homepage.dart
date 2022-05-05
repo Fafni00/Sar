@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:ecommerce_app/Model/HomeproductModel.dart';
 import 'package:ecommerce_app/Cart/CartNotification.dart';
+import 'package:ecommerce_app/Model/HomeproductModel.dart';
 import 'package:ecommerce_app/UserHomePage/Components/HomeProductDisplay/Categoryforhomepage.dart';
 import 'package:ecommerce_app/UserHomePage/Components/banner_widge_page.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';

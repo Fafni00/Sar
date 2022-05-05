@@ -1,12 +1,11 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_app/Cart/Counter_widget.dart';
 import 'package:ecommerce_app/Model/HomeproductModel.dart';
 import 'package:ecommerce_app/Services/Cartservices.dart';
-import 'package:ecommerce_app/Cart/Counter_widget.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 class CartPage extends StatefulWidget {
@@ -38,7 +37,7 @@ class _CartPageState extends State<CartPage> {
 
   getCartData() async {
     final snapshot = await _cart.cart.doc(userId).collection('products').get();
-    if (snapshot.docs.length == 0) {
+    if (snapshot.docs.isEmpty) {
       setState(() {
         _loading = false;
       });
@@ -73,7 +72,7 @@ class _CartPageState extends State<CartPage> {
             });
 
     return _loading
-        ? Container(
+        ? SizedBox(
             height: 56,
             child: Center(
                 child: CircularProgressIndicator(
@@ -92,7 +91,9 @@ class _CartPageState extends State<CartPage> {
                   log('adding product');
                   _cart
                       .addToCart(
-                          product: widget.product, productId: widget.productId)
+                    product: widget.product,
+                    productId: widget.productId,
+                  )
                       .then((value) {
                     setState(() {
                       _exist = true;

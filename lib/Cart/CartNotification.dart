@@ -2,9 +2,8 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/Cart/CartScreen.dart';
-import 'package:ecommerce_app/Services/Cartservices.dart';
 import 'package:ecommerce_app/Provider/CartProvider.dart';
-
+import 'package:ecommerce_app/Services/Cartservices.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -56,7 +55,7 @@ class _CartNotificationState extends State<CartNotification> {
                           ' | ',
                           style: TextStyle(color: Colors.white),
                         ),
-                        Text('\Rs.${_cartProvider.subTotal.toStringAsFixed(0)}',
+                        Text('Rs.${_cartProvider.subTotal.toStringAsFixed(0)}',
                             style:
                                 TextStyle(fontSize: 18, color: Colors.white)),
                       ],

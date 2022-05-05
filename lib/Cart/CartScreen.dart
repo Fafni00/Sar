@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/Provider/CartProvider.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,9 +19,11 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  final userId = FirebaseAuth.instance.currentUser?.uid;
   @override
   Widget build(BuildContext context) {
     var _cartProvider = Provider.of<CartProvider>(context);
+    final mediaQueary = MediaQuery.of(context).size;
     return Scaffold(
       bottomSheet: Container(
           height: 60,
@@ -30,45 +34,126 @@ class _CartScreenState extends State<CartScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('\Rs.${_cartProvider.subTotal.toStringAsFixed(0)}',
-                      style: TextStyle(fontSize: 18, color: Colors.white)),
+                  Text('Rs.${_cartProvider.subTotal.toStringAsFixed(0)}',
+                      style:
+                          const TextStyle(fontSize: 18, color: Colors.white)),
                   ElevatedButton(
                       style: ButtonStyle(
                           backgroundColor:
                               MaterialStateProperty.all(Colors.green)),
                       onPressed: () {},
-                      child: Text('Checkout',
+                      child: const Text('Checkout',
                           style: TextStyle(fontSize: 18, color: Colors.white)))
                 ],
               ),
             ),
           )),
-      body: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBozIsSxrolled) {
-            return [
-              SliverAppBar(
-                floating: true,
-                snap: true,
-                backgroundColor: Colors.white,
-                elevation: 0.0,
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Text(widget.document.['storeName'], style: TextStyle(fontSize: 18),),
-                    Text(
-                      '${_cartProvider.cartQty} ${_cartProvider.cartQty > 1 ? 'Item' : 'Items'}',
-                      style: TextStyle(
-                          fontSize: 18, color: AppColors.buttonnavigation),
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('cart')
+            .doc(userId)
+            .collection('products')
+            .snapshots(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshots) {
+          final cartData = snapshots.data?.docs;
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.green,
+              centerTitle: true,
+              title: const Text('My Cart'),
+            ),
+            body: ListView.separated(
+              padding: const EdgeInsets.only(top: 15),
+              itemCount: cartData?.length ?? 0,
+              itemBuilder: (ctx, index) {
+                final data = cartData?[index];
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          offset: const Offset(10, 10),
+                          blurRadius: 50,
+                          color: Colors.black.withOpacity(0.2),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-            ];
-          },
-          body: Container(
-              child: Column(
-            children: [ListTile()],
-          ))),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: CachedNetworkImage(
+                            imageUrl: data?['img'] ?? '',
+                            height: mediaQueary.height / 6,
+                            width: mediaQueary.width / 3,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            cartProductDetail(
+                              'Product Name',
+                              '${data?['productName']}',
+                            ),
+                            cartProductDetail(
+                              'Product Qty',
+                              '${data?['qty']}',
+                            ),
+                            cartProductDetail(
+                              'From Store',
+                              '${data?['storeName']}',
+                            ),
+                            cartProductDetail(
+                              'Price Per Product',
+                              '${data?['price']}',
+                            ),
+                            cartProductDetail(
+                              'Total NP\'r',
+                              '${data?['price']}',
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+              separatorBuilder: (ctx, index) {
+                return const Divider();
+              },
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget cartProductDetail(String title, String detail) {
+    return Padding(
+      padding: const EdgeInsets.all(3.0),
+      child: Row(
+        children: [
+          Text(
+            '$title : ',
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(detail),
+        ],
+      ),
     );
   }
 }

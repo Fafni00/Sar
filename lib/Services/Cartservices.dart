@@ -21,6 +21,7 @@ class CartServices {
       'storeName': product.storeName,
       'qty': 1,
       'total': product.regularPrice,
+      'img': product.imageUrls?[0] ?? '',
     });
   }
 
