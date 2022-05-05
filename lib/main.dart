@@ -1,28 +1,21 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:ecommerce_app/Banner/HomeProductList.dart';
-import 'package:ecommerce_app/Banner/UserProductDetailScreen.dart';
-import 'package:ecommerce_app/Cart/Cart.dart';
-import 'package:ecommerce_app/Cart/Counter_widget.dart';
-import 'package:ecommerce_app/Cart/cartprovider.dart';
+import 'package:ecommerce_app/Provider/CartProvider.dart';
 import 'package:ecommerce_app/Cart/CartScreen.dart';
-import 'package:ecommerce_app/Navigationpages/Homepagenavigation.dart';
-import 'package:ecommerce_app/Sellerprofile%20pages/AddproductUI/AddProductspage.dart';
-import 'package:ecommerce_app/Sellerprofile%20pages/ViewOrder.dart';
-import 'package:ecommerce_app/UserProfile/UserProflie.dart';
-import 'package:ecommerce_app/UserRegistration/UserLogin.dart';
 
-import 'package:ecommerce_app/Sellerprofile%20pages/AllProducts/AllProduct.dart';
-import 'package:ecommerce_app/Sellerprofile%20pages/SellerProfileSection.dart';
-import 'package:ecommerce_app/Sellerprofile%20pages/Sellerprovider.dart';
+import 'package:ecommerce_app/Provider/SellerProvider.dart';
+import 'package:ecommerce_app/SellerHome/SellerNavigation.dart';
+import 'package:ecommerce_app/SellerProduct/AddProduct/AddProductScreen.dart';
+import 'package:ecommerce_app/SellerProduct/AllProduct/AllProduct.dart';
+import 'package:ecommerce_app/SellerProfile/SellerProfileSection.dart';
+import 'package:ecommerce_app/SellerProfile/ViewOrder.dart';
+import 'package:ecommerce_app/UserLoginRegistration/UserLogin.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
-import 'Sellerprofile pages/AddProduct/product_provider.dart';
+import 'Provider/ProductProvider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

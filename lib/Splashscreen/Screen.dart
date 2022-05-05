@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:ecommerce_app/UserRegistration/UserLogin.dart';
+import 'package:ecommerce_app/UserLoginRegistration/UserLogin.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

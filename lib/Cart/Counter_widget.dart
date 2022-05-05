@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:ecommerce_app/Cart/Cartservices.dart';
+import 'package:ecommerce_app/Services/Cartservices.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:flutter/material.dart';
 
-import '../Banner/HomeproductModel.dart';
+import '../Model/HomeproductModel.dart';
 
 class CounterWidget extends StatefulWidget {
   final String? docId;

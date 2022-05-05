@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:ecommerce_app/Navigationpages/Homepage.dart';
 import 'package:ecommerce_app/Splashscreen/Screen.dart';
 import 'package:flutter/material.dart';
 

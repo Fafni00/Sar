@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ecommerce_app/Banner/HomeproductModel.dart';
-import 'package:ecommerce_app/Cart/Cartservices.dart';
+import 'package:ecommerce_app/Model/HomeproductModel.dart';
+import 'package:ecommerce_app/Services/Cartservices.dart';
 import 'package:ecommerce_app/Cart/Counter_widget.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';

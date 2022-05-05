@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:ecommerce_app/category/Category%20Model/SubCategoryModel.dart';
-import 'package:ecommerce_app/category/subcatgorylist.dart';
+import 'package:ecommerce_app/Model/SubCategoryModel.dart';
+import 'package:ecommerce_app/category/SubProductList.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/firestore.dart';

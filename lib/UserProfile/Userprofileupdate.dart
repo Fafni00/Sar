@@ -2,7 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/UserProfile/UserProflie.dart';
-import 'package:ecommerce_app/UserRegistration/Usermodel.dart';
+import 'package:ecommerce_app/Model/Usermodel.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

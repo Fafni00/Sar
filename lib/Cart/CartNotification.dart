@@ -2,9 +2,9 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/Cart/CartScreen.dart';
-import 'package:ecommerce_app/Cart/Cartservices.dart';
-import 'package:ecommerce_app/Cart/cartprovider.dart';
-import 'package:ecommerce_app/Sellerprofile%20pages/AllProducts/Productcard.dart';
+import 'package:ecommerce_app/Services/Cartservices.dart';
+import 'package:ecommerce_app/Provider/CartProvider.dart';
+
 import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

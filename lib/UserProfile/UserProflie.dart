@@ -1,17 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ecommerce_app/Cart/Cart.dart';
+import 'package:ecommerce_app/UserLoginRegistration/UserLogin.dart';
 
 import 'package:ecommerce_app/UserProfile/Order%20pages/Vieworderpage.dart';
-import 'package:ecommerce_app/UserRegistration/UserLogin.dart';
 import 'package:ecommerce_app/UserProfile/Userprofileupdate.dart';
-import 'package:ecommerce_app/UserRegistration/Usermodel.dart';
+import 'package:ecommerce_app/Model/Usermodel.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
-import 'package:provider/provider.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({Key? key}) : super(key: key);
