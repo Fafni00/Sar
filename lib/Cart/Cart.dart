@@ -1,12 +1,12 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ecommerce_app/Cart/Counter_widget.dart';
 import 'package:ecommerce_app/Model/HomeproductModel.dart';
 import 'package:ecommerce_app/Services/Cartservices.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({
@@ -79,51 +79,45 @@ class _CartPageState extends State<CartPage> {
               valueColor: AlwaysStoppedAnimation<Color>(
                   Theme.of(context).backgroundColor),
             )))
-        : _exist
-            ? CounterWidget(
+        : InkWell(
+            onTap: (() {
+              log('adding product');
+              _cart
+                  .addToCart(
                 product: widget.product,
-                productID: widget.productId,
-                qty: _qty,
-                docId: _docId,
+                productId: widget.productId,
               )
-            : InkWell(
-                onTap: (() {
-                  log('adding product');
-                  _cart
-                      .addToCart(
-                    product: widget.product,
-                    productId: widget.productId,
-                  )
-                      .then((value) {
-                    setState(() {
-                      _exist = true;
-                    });
-                    log('Product Added Successfully');
-                  });
-                }),
-                child: Container(
-                  color: AppColors.buttonnavigation,
-                  margin: const EdgeInsets.only(left: 10),
-                  height: 50,
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(0.8),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: const [
-                          SizedBox(width: 10),
-                          Icon(Icons.shopping_cart, color: Colors.white),
-                          SizedBox(width: 20),
-                          Text(
-                            'Add to Cart',
-                            style: TextStyle(color: Colors.white, fontSize: 18),
-                          ),
-                          SizedBox(width: 20),
-                        ],
+                  .then((value) {
+                setState(() {
+                  _exist = true;
+                });
+                EasyLoading.showSuccess('Product Added to Cart');
+                log('Product Added Successfully');
+              });
+            }),
+            child: Container(
+              color: AppColors.buttonnavigation,
+              margin: const EdgeInsets.only(left: 10),
+              height: 50,
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(0.8),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      SizedBox(width: 10),
+                      Icon(Icons.shopping_cart, color: Colors.white),
+                      SizedBox(width: 20),
+                      Text(
+                        'Add to Cart',
+                        style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
-                    ),
+                      SizedBox(width: 20),
+                    ],
                   ),
                 ),
-              );
+              ),
+            ),
+          );
   }
 }

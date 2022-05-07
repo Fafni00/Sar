@@ -6,6 +6,7 @@ import 'package:ecommerce_app/Model/Usermodel.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class UpdateProfile extends StatefulWidget {
   static const String id = 'udateprofile';
@@ -20,8 +21,20 @@ class _UpdateProfileState extends State<UpdateProfile> {
   User? user = FirebaseAuth.instance.currentUser;
   final name = TextEditingController();
   final username = TextEditingController();
-  final email = TextEditingController();
   final contact = TextEditingController();
+
+  updateProfile() {
+    if (_formkey.currentState!.validate()) {
+      return FirebaseFirestore.instance
+          .collection('users')
+          .doc(user!.uid)
+          .update({
+        'name': name.text,
+        'username': username.text,
+        'contact': contact.text,
+      });
+    }
+  }
 
   Widget _textField({
     TextEditingController? controller,
@@ -118,16 +131,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
                 ),
                 SizedBox(height: 10),
 
-                // email field
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: _textField(
-                      label: ' Enter Email',
-                      inputType: TextInputType.text,
-                      controller: email),
-                ),
-                SizedBox(height: 10),
-
                 // contact field
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -149,7 +152,13 @@ class _UpdateProfileState extends State<UpdateProfile> {
                         'Update',
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
-                      onPressed: () {}),
+                      onPressed: () {
+                        EasyLoading.show(status: 'Updating profile...');
+                        updateProfile().then((value) {
+                          EasyLoading.showSuccess('Profile Updated');
+                          Navigator.pop(context);
+                        });
+                      }),
                 )
               ],
             )));

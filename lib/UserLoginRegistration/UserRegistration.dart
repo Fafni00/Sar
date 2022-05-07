@@ -249,7 +249,7 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
               )),
         ));
 
-    //creating a text field for name
+    //creating a text field for confirm password
     final confirmpasswordField = TextFormField(
         autofocus: false,
         controller: confirmpasswordEditingController,
@@ -269,7 +269,7 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
         decoration: InputDecoration(
           contentPadding:
               EdgeInsets.only(top: 20, bottom: 20, left: 20, right: 15),
-          hintText: "Conform Password",
+          hintText: "Confirm Password",
           hintStyle: TextStyle(fontSize: 15, color: AppColors.text1Color),
           border: InputBorder.none,
           fillColor: AppColors.textboxColor,

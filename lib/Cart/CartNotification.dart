@@ -23,11 +23,6 @@ class _CartNotificationState extends State<CartNotification> {
   Widget build(BuildContext context) {
     final _cartProvider = Provider.of<CartProvider>(context);
     _cartProvider.getCartTotal();
-    _cart.getStoreName().then((value) {
-      setState(() {
-        document = value;
-      });
-    });
     return Container(
         height: 45,
         width: MediaQuery.of(context).size.width,
@@ -55,15 +50,11 @@ class _CartNotificationState extends State<CartNotification> {
                           ' | ',
                           style: TextStyle(color: Colors.white),
                         ),
-                        Text('Rs.${_cartProvider.subTotal.toStringAsFixed(0)}',
+                        Text('Rs.${_cartProvider.subTotal}',
                             style:
                                 TextStyle(fontSize: 18, color: Colors.white)),
                       ],
                     ),
-
-                    // if (document!.exists)
-                    //   Text('From ${document!['storeName']}',
-                    //       style: TextStyle(color: Colors.white, fontSize: 16))
                   ],
                 ),
               ),

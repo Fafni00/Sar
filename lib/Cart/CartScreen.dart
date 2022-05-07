@@ -1,9 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/Provider/CartProvider.dart';
+import 'package:ecommerce_app/Services/Cartservices.dart';
+import 'package:ecommerce_app/Services/Orderservices.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 
 class CartScreen extends StatefulWidget {
@@ -20,6 +23,9 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   final userId = FirebaseAuth.instance.currentUser?.uid;
+  final OrderServices _order = OrderServices();
+  final CartServices _cart = CartServices();
+
   @override
   Widget build(BuildContext context) {
     var _cartProvider = Provider.of<CartProvider>(context);
@@ -41,7 +47,10 @@ class _CartScreenState extends State<CartScreen> {
                       style: ButtonStyle(
                           backgroundColor:
                               MaterialStateProperty.all(Colors.green)),
-                      onPressed: () {},
+                      onPressed: () {
+                        _saveOrder(_cartProvider);
+                        EasyLoading.showSuccess('Your order is submitted');
+                      },
                       child: const Text('Checkout',
                           style: TextStyle(fontSize: 18, color: Colors.white)))
                 ],
@@ -90,7 +99,7 @@ class _CartScreenState extends State<CartScreen> {
                             imageUrl: data?['img'] ?? '',
                             height: mediaQueary.height / 6,
                             width: mediaQueary.width / 3,
-                            fit: BoxFit.cover,
+                            fit: BoxFit.contain,
                           ),
                         ),
                         const SizedBox(
@@ -147,13 +156,32 @@ class _CartScreenState extends State<CartScreen> {
           Text(
             '$title : ',
             style: const TextStyle(
-              fontSize: 14,
+              fontSize: 12,
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text(detail),
+          Text(
+            detail,
+            style: const TextStyle(
+              fontSize: 10,
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  _saveOrder(CartProvider cartProvider) {
+    _order.saveOrder({
+      'products': cartProvider.cartList,
+      'userId': userId,
+      'orderStatus': 'ordered'
+    }).then((value) {
+      _cart.deleteCart().then((value) {
+        _cart.checkData().then((value) {
+          Navigator.pop(context);
+        });
+      });
+    });
   }
 }

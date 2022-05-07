@@ -19,9 +19,6 @@ class ProductProvider with ChangeNotifier {
       bool? manageInventory,
       int? stockonhand,
       int? reOrderLevel,
-      bool? manageDeliveries,
-      int? deliveryCharge,
-      String? deliveryLocation,
       String? tags,
       List? sizeList,
       String? additionalDetail,
@@ -69,15 +66,6 @@ class ProductProvider with ChangeNotifier {
     }
     if (reOrderLevel != null) {
       productData!['reOrderLevel'] = reOrderLevel;
-    }
-    if (manageDeliveries != null) {
-      productData!['manageDeliveries'] = manageDeliveries;
-    }
-    if (deliveryCharge != null) {
-      productData!['deliveryCharge'] = deliveryCharge;
-    }
-    if (deliveryLocation != null) {
-      productData!['deliveryLocation'] = deliveryLocation;
     }
     if (tags != null) {
       productData!['tags'] = tags;

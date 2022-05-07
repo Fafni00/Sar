@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_app/UserHomePage/Components/HomeProductDisplay/UserProductDetail.dart';
+import 'package:ecommerce_app/Utils/Colors.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/firestore.dart';
@@ -13,6 +14,16 @@ class SubProductList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFe2efdd),
+      appBar: AppBar(
+        backgroundColor: AppColors.buttonColor,
+        automaticallyImplyLeading: true,
+        centerTitle: true,
+        title: Text(
+          'Product List',
+          style: TextStyle(fontSize: 30, color: Colors.white),
+        ),
+      ),
       body: FirestoreQueryBuilder<Product>(
         query: subproductQuery(subCategory: subCategory),
         builder: (context, snapshot, _) {
@@ -22,7 +33,7 @@ class SubProductList extends StatelessWidget {
             shrinkWrap: true,
             physics: ScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3, childAspectRatio: 1 / 1.20),
+                crossAxisCount: 3, childAspectRatio: 1 / 1.30),
             itemCount: snapshot.docs.length,
             itemBuilder: (context, index) {
               // if we reached the end of the currently obtained items, we try to

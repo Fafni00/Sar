@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Product {
   Product(
@@ -13,9 +14,6 @@ class Product {
       this.manageInventory,
       this.stockonhand,
       this.reOrderLevel,
-      this.manageDeliveries,
-      this.deliveryCharge,
-      this.deliveryLocation,
       this.tags,
       this.sizeList,
       this.additionalDetail,
@@ -55,16 +53,6 @@ class Product {
             reOrderLevel: json['reOrderLevel'] == null
                 ? null
                 : json['reOrderLevel']! as int,
-            manageDeliveries: json['manageDeliveries'] == null
-                ? null
-                : json['manageDeliveries']! as bool,
-            deliveryCharge: json['deliveryCharge'] == null
-                ? null
-                : json['deliveryCharge']! as int,
-            deliveryLocation: json['deliveryLocation'] == null
-                ? null
-                : json['deliveryLocation']! as String,
-            tags: json['tags'] == null ? null : json['tags']! as String,
             sizeList:
                 json['sizeList'] == null ? null : json['sizeList']! as List,
             additionalDetail: json['additionalDetail'] == null
@@ -78,19 +66,14 @@ class Product {
   final String? productName;
   final String? storeName;
   final int? regularPrice;
-
   final String? category;
   final String? mainCategory;
   final String? subCategory;
   final String? description;
-
   final String? sku;
   final bool? manageInventory;
   final int? stockonhand;
   final int? reOrderLevel;
-  final bool? manageDeliveries;
-  final int? deliveryCharge;
-  final String? deliveryLocation;
   final String? tags;
   final List? sizeList;
   final String? additionalDetail;
@@ -112,9 +95,6 @@ class Product {
       'manageInventory': manageInventory,
       'stockonhand': stockonhand,
       'reOrderLevel': reOrderLevel,
-      'manageDeliveries': manageDeliveries,
-      'deliveryCharge': deliveryCharge,
-      'deliveryLocation': deliveryLocation,
       'tags': tags,
       'sizeList': sizeList,
       'additionalDetail': additionalDetail,
@@ -126,6 +106,7 @@ class Product {
   }
 }
 
+User? user = FirebaseAuth.instance.currentUser;
 productQuery(approved) {
   return FirebaseFirestore.instance
       .collection('products')

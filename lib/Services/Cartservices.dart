@@ -6,10 +6,6 @@ class CartServices {
   CollectionReference cart = FirebaseFirestore.instance.collection('cart');
   User? user = FirebaseAuth.instance.currentUser;
 
-  // Future<void> addToCart({data}) {
-  //   return cart.doc(user?.uid).set(data.toJson());
-  // }
-
   Future<void> addToCart({Product? product, String? productId}) {
     cart.doc(user?.uid).set({
       'user': user?.uid,
@@ -25,11 +21,7 @@ class CartServices {
     });
   }
 
-  Future<void> updateCartQty(
-    docId,
-    qty,
-    /*total*/
-  ) async {
+  Future<void> updateCartQty(docId, qty, total) async {
     DocumentReference documentReference = FirebaseFirestore.instance
         .collection('cart')
         .doc(user!.uid)
@@ -46,7 +38,7 @@ class CartServices {
           }
           transaction.update(documentReference, {
             'qty': qty,
-            //'total': total,
+            'total': total,
           });
 
           // Return the new count
@@ -67,8 +59,12 @@ class CartServices {
     }
   }
 
-  Future<DocumentSnapshot> getStoreName() async {
-    DocumentSnapshot doc = await cart.doc(user!.uid).get();
-    return doc;
+  Future<void> deleteCart() async {
+    final result =
+        await cart.doc(user!.uid).collection('products').get().then((snapshot) {
+      for (DocumentSnapshot ds in snapshot.docs) {
+        ds.reference.delete();
+      }
+    });
   }
 }

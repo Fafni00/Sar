@@ -2,7 +2,6 @@
 
 import 'package:ecommerce_app/Provider/ProductProvider.dart';
 import 'package:ecommerce_app/SellerProduct/AddProduct/component/AddProductImage.dart';
-import 'package:ecommerce_app/SellerProduct/AddProduct/component/DeliveryTab.dart';
 import 'package:ecommerce_app/SellerProduct/AddProduct/component/GeneralProduct.dart';
 import 'package:ecommerce_app/SellerProduct/AddProduct/component/Inventorytab.dart';
 import 'package:ecommerce_app/SellerProduct/AddProduct/component/ProductAttributes.dart';
@@ -35,7 +34,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     return Form(
         key: _formkey,
         child: DefaultTabController(
-            length: 5,
+            length: 4,
             initialIndex: 0,
             child: Scaffold(
                 appBar: AppBar(
@@ -55,9 +54,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           child: Text('Inventory'),
                         ),
                         Tab(
-                          child: Text('Deliveries'),
-                        ),
-                        Tab(
                           child: Text('Product Attributes'),
                         ),
                         Tab(
@@ -70,7 +66,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   children: [
                     GeneralProduct(),
                     Inventorytab(),
-                    DeliveryTab(),
                     ProductAttributes(),
                     AddProductImage()
                   ],
@@ -89,6 +84,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               return;
                             }
                             if (_formkey.currentState!.validate()) {
+                              EasyLoading.show(status: 'Please wait...');
                               //to get the formdata save in productprovider
                               _provider.getFormData(vendor: {
                                 'name': _seller.seller!.storeName,
@@ -99,7 +95,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                   .uploadFiles(
                                       images: _provider.imageFiles,
                                       ref:
-                                          'products/${_seller.seller!.storeName}',
+                                          'products/${_seller.seller!.storeName}/${_provider.productData!['productName']}',
                                       provider: _provider)
                                   .then(
                                 (value) {
@@ -110,9 +106,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                             data: _provider.productData,
                                             context: context)
                                         .then((value) {
-                                      setState(() {
-                                        _provider.clearProductData();
-                                      });
+                                      EasyLoading.dismiss();
+                                      _provider.clearProductData();
                                     });
                                   }
                                 },

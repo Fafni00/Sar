@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:ecommerce_app/Order/MyOrder.dart';
 import 'package:ecommerce_app/Provider/CartProvider.dart';
 import 'package:ecommerce_app/Cart/CartScreen.dart';
 
@@ -7,11 +8,15 @@ import 'package:ecommerce_app/Provider/SellerProvider.dart';
 import 'package:ecommerce_app/SellerHome/SellerNavigation.dart';
 import 'package:ecommerce_app/SellerProduct/AddProduct/AddProductScreen.dart';
 import 'package:ecommerce_app/SellerProduct/AllProduct/AllProduct.dart';
+import 'package:ecommerce_app/SellerProduct/ProductOrder/ProductOrder.dart';
 import 'package:ecommerce_app/SellerProfile/SellerProfileSection.dart';
-import 'package:ecommerce_app/SellerProfile/ViewOrder.dart';
+import 'package:ecommerce_app/Splashscreen/Splashpage.dart';
+import 'package:ecommerce_app/UserHomePage/Homepagenavigation.dart';
 import 'package:ecommerce_app/UserLoginRegistration/UserLogin.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutterfire_ui/auth.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
@@ -43,6 +48,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       home: Loginpage(),
+      builder: EasyLoading.init(),
       routes: {
         SellerProfileSection.id: (context) => SellerProfileSection(),
         AddProductScreen.id: (context) => AddProductScreen(),

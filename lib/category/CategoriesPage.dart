@@ -25,6 +25,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
         appBar: AppBar(
           backgroundColor: AppColors.buttonColor,
           automaticallyImplyLeading: false,
+          centerTitle: true,
           title: Text(
             'Sar',
             style: TextStyle(

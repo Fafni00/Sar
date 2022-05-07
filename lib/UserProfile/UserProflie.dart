@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_app/Order/MyOrder.dart';
 import 'package:ecommerce_app/UserLoginRegistration/UserLogin.dart';
 
-import 'package:ecommerce_app/UserProfile/Order%20pages/Vieworderpage.dart';
 import 'package:ecommerce_app/UserProfile/Userprofileupdate.dart';
 import 'package:ecommerce_app/Model/Usermodel.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';
@@ -36,8 +36,10 @@ class _UserProfileState extends State<UserProfile> {
           leading: IconButton(
             icon: Icon(Icons.logout, color: Colors.white),
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: ((context) => Loginpage())));
+              _signOut();
+              resetuserDetail();
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => Loginpage()));
             },
           ),
           backgroundColor: AppColors.buttonColor,
@@ -118,7 +120,7 @@ class _UserProfileState extends State<UserProfile> {
                   )),
             ],
           ),
-          // to show the cartpage
+          // to show the orderpage
           SizedBox(height: 30),
           Column(children: [
             Row(children: [
@@ -128,7 +130,7 @@ class _UserProfileState extends State<UserProfile> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (BuildContext) => ViewOrder()));
+                              builder: (BuildContext) => MyOrder()));
                     },
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -170,7 +172,7 @@ class _UserProfileState extends State<UserProfile> {
                               )),
                         ])),
 
-                // to show the cartpage
+                // to show the queries
                 SizedBox(height: 30),
                 Column(children: [
                   Row(
@@ -179,11 +181,11 @@ class _UserProfileState extends State<UserProfile> {
                         children: [
                           InkWell(
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext) =>
-                                            ViewOrder()));
+                                //   Navigator.push(
+                                //       context,
+                                //       MaterialPageRoute(
+                                //           builder: (BuildContext) =>
+                                //               ViewOrder()));
                               },
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -249,5 +251,17 @@ class _UserProfileState extends State<UserProfile> {
       loggedInUser = UserModel.fromMap(value.data());
       setState(() {});
     }));
+  }
+
+  _signOut() async {
+    await FirebaseAuth.instance.signOut();
+    User? user = FirebaseAuth.instance.currentUser;
+    print('Current User ');
+    print(user?.uid);
+  }
+
+  resetuserDetail() {
+    user = null;
+    print("Seller set to null");
   }
 }

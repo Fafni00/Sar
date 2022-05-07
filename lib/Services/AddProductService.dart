@@ -55,8 +55,11 @@ class AddProductService {
       {CollectionReference? collection,
       Map<String, dynamic>? data,
       BuildContext? context}) {
-    return products.add(data).then((value) => scaffold(context, "Product Added")
-        .catchError(
+    products.doc(user?.uid).set({
+      'seller': user?.uid,
+    });
+    return products.add(data!).then((value) =>
+        scaffold(context, "Product Added").catchError(
             (error) => scaffold(context, "failed to add product :$error")));
   }
 
@@ -72,13 +75,6 @@ class AddProductService {
             ScaffoldMessenger.of(context).clearSnackBars();
           },
         )));
-  }
-
-//to create datetime format
-  String formattedDate(date) {
-    var outputFormat = DateFormat('dd/mm/yyyy hh:mm:aa');
-    var outputdate = outputFormat.format(date);
-    return outputdate;
   }
 
   //for number format

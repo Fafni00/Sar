@@ -33,7 +33,6 @@ class _ProductDetailState extends State<ProductDetail> {
   final _additionalDetail = TextEditingController();
   DateTime? saledate;
   bool? manageInventory;
-  bool? manageDeliveries;
 
   Widget _textField({
     TextEditingController? controller,
@@ -62,9 +61,6 @@ class _ProductDetailState extends State<ProductDetail> {
       'manageInventory': manageInventory,
       'stockonhand': int.parse(_stockonhand.text),
       'reOrderLevel': int.parse(_reOrderLevel.text),
-      'manageDeliveries': manageDeliveries,
-      'deliveryCharge': int.parse(_deliveryCharge.text),
-      'deliveryLocation': _deliveryLocation.text,
       'additionalDetail': _additionalDetail.text
     }).then((value) {
       setState(() {
@@ -93,17 +89,10 @@ class _ProductDetailState extends State<ProductDetail> {
       _reOrderLevel.text = widget.product?.reOrderLevel != null
           ? widget.product!.reOrderLevel.toString()
           : ' ';
-      _deliveryCharge.text = widget.product?.deliveryCharge != null
-          ? widget.product!.deliveryCharge.toString()
-          : ' ';
-      _deliveryLocation.text = widget.product?.deliveryLocation != null
-          ? widget.product!.deliveryLocation.toString()
-          : ' ';
       _additionalDetail.text = widget.product?.additionalDetail != null
           ? widget.product!.additionalDetail.toString()
           : ' ';
       manageInventory = widget.product!.manageInventory;
-      manageDeliveries = widget.product!.manageDeliveries;
     });
     super.initState();
   }
@@ -205,7 +194,7 @@ class _ProductDetailState extends State<ProductDetail> {
                           maxLine: 5),
 
                       SizedBox(height: 10),
-                      // to show product price and sales price
+                      // to show product price
                       Container(
                         color: const Color(0xFFe2efdd),
                         child: Padding(
@@ -230,32 +219,6 @@ class _ProductDetailState extends State<ProductDetail> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 10),
-                              Row(
-                                children: [
-                                  Text('Sale Until: '),
-                                  SizedBox(width: 10),
-                                  Text(_service.formattedDate(saledate))
-                                ],
-                              ),
-                              SizedBox(height: 10),
-                              if (_editable == false)
-                                ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        primary: Color(0xFF056608)),
-                                    child: Text('Change date'),
-                                    onPressed: () {
-                                      showDatePicker(
-                                              context: context,
-                                              initialDate: saledate!,
-                                              firstDate: DateTime.now(),
-                                              lastDate: DateTime(5000))
-                                          .then((value) {
-                                        setState(() {
-                                          saledate = value;
-                                        });
-                                      });
-                                    })
                             ],
                           ),
                         ),
@@ -365,54 +328,6 @@ class _ProductDetailState extends State<ProductDetail> {
                         color: Color(0xFF056608),
                       ),
                       SizedBox(height: 10),
-
-                      // to show the delivery
-                      Container(
-                        alignment: Alignment.topLeft,
-                        child: Text('Deliveries :',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)),
-                      ),
-
-                      Container(
-                        color: const Color(0xFFe2efdd),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Row(
-                                  children: [
-                                    Text('Location:'),
-                                    SizedBox(width: 10),
-                                    Expanded(
-                                      child: _textField(
-                                          label: 'Location',
-                                          inputType: TextInputType.text,
-                                          controller: _deliveryLocation),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(width: 10),
-                              Expanded(
-                                child: Row(
-                                  children: [
-                                    Text('Charge:'),
-                                    SizedBox(width: 10),
-                                    Expanded(
-                                      child: _textField(
-                                          label: 'Charge',
-                                          inputType: TextInputType.text,
-                                          controller: _deliveryCharge),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
 
                       // to show the additional detail
                       SizedBox(height: 10),
