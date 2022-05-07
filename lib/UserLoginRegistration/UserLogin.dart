@@ -3,7 +3,6 @@
 import 'package:ecommerce_app/SellerLoginRegistration/SellerLogin.dart';
 import 'package:ecommerce_app/UserHomePage/Homepagenavigation.dart';
 import 'package:ecommerce_app/UserLoginRegistration/UserRegistration.dart';
-
 import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
@@ -94,6 +93,7 @@ class _LoginpageState extends State<Loginpage> {
         if (!regex.hasMatch(value)) {
           return ("Please Enter Correct password(Min. 6 Characters)");
         }
+        return null;
       },
       onSaved: (value) {
         passwordcontroller.text = value!;
@@ -281,7 +281,7 @@ class _LoginpageState extends State<Loginpage> {
         // code to create clickable texts
         RichText(
             text: TextSpan(
-                text: "Don\'t have an Account?",
+                text: "Don't have an Account?",
                 style: TextStyle(color: Colors.black, fontSize: 15),
                 children: [
               TextSpan(

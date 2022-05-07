@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-
 import 'package:ecommerce_app/Model/HomeproductModel.dart';
 import 'package:ecommerce_app/UserHomePage/Components/HomeProductDisplay/UserProductDetail.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +17,8 @@ class HomeProductList extends StatelessWidget {
 
         return GridView.builder(
           shrinkWrap: true,
-          physics: ScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          physics: const ScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3, childAspectRatio: 1 / 1.30),
           itemCount: snapshot.docs.length,
           itemBuilder: (context, index) {
@@ -52,27 +51,29 @@ class HomeProductList extends StatelessWidget {
                   width: 80,
                   color: Colors.white,
                   padding: const EdgeInsets.all(8),
-                  child: Column(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(4),
-                        child: Container(
-                          height: 100,
-                          width: 90,
-                          child: Hero(
-                            tag: product.imageUrls![0],
-                            child: CachedNetworkImage(
-                                imageUrl: product.imageUrls![0],
-                                fit: BoxFit.cover),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(4),
+                          child: SizedBox(
+                            height: 100,
+                            width: 90,
+                            child: Hero(
+                              tag: product.imageUrls![0],
+                              child: CachedNetworkImage(
+                                  imageUrl: product.imageUrls![0],
+                                  fit: BoxFit.cover),
+                            ),
                           ),
                         ),
-                      ),
-                      Text(product.productName!,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 14,
-                          )),
-                    ],
+                        Text(product.productName!,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 14,
+                            )),
+                      ],
+                    ),
                   ),
                 ),
               ),

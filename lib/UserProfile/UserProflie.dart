@@ -1,11 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_app/Model/Usermodel.dart';
 import 'package:ecommerce_app/Order/MyOrder.dart';
 import 'package:ecommerce_app/UserLoginRegistration/UserLogin.dart';
-
 import 'package:ecommerce_app/UserProfile/Userprofileupdate.dart';
-import 'package:ecommerce_app/Model/Usermodel.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -36,10 +35,7 @@ class _UserProfileState extends State<UserProfile> {
           leading: IconButton(
             icon: Icon(Icons.logout, color: Colors.white),
             onPressed: () {
-              _signOut();
-              resetuserDetail();
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => Loginpage()));
+              _signOut(context);
             },
           ),
           backgroundColor: AppColors.buttonColor,
@@ -82,7 +78,7 @@ class _UserProfileState extends State<UserProfile> {
                     children: [
                       Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Container(
+                          child: SizedBox(
                             height: 70,
                             child: Column(children: [
                               Text('${loggedInUser.name}',
@@ -253,15 +249,14 @@ class _UserProfileState extends State<UserProfile> {
     }));
   }
 
-  _signOut() async {
-    await FirebaseAuth.instance.signOut();
-    User? user = FirebaseAuth.instance.currentUser;
-    print('Current User ');
-    print(user?.uid);
-  }
-
-  resetuserDetail() {
-    user = null;
-    print("Seller set to null");
+  _signOut(BuildContext context) async {
+    await FirebaseAuth.instance.signOut().then(
+          (value) => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Loginpage(),
+            ),
+          ),
+        );
   }
 }
