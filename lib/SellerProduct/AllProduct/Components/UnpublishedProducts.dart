@@ -22,6 +22,9 @@ class UnpublishedProducts extends StatelessWidget {
           if (snapshot.hasError) {
             return Text('Something went wrong! ${snapshot.error}');
           }
+          if (snapshot.docs.isEmpty) {
+            return Center(child: Text('No Published Products'));
+          }
           return ProductCard(
             snapshot: snapshot,
           );

@@ -86,10 +86,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             if (_formkey.currentState!.validate()) {
                               EasyLoading.show(status: 'Please wait...');
                               //to get the formdata save in productprovider
-                              _provider.getFormData(vendor: {
-                                'name': _seller.seller!.storeName,
-                                'uid': _service.user!.uid,
-                              });
+                              _provider.getFormData(
+                                selleruid: _service.user!.uid,
+                              );
                               //to upload the image files to the firestore
                               _service
                                   .uploadFiles(
@@ -101,14 +100,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                 (value) {
                                   // to save files in the database
                                   if (value.isNotEmpty) {
-                                    _service
-                                        .saveTodb(
-                                            data: _provider.productData,
-                                            context: context)
-                                        .then((value) {
-                                      EasyLoading.dismiss();
-                                      _provider.clearProductData();
-                                    });
+                                    _service.saveTodb(
+                                        data: _provider.productData,
+                                        context: context);
+                                    EasyLoading.dismiss();
+                                    _provider.clearProductData();
                                   }
                                 },
                               );

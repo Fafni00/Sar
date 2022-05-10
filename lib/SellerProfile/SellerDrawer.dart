@@ -93,7 +93,7 @@ class SellerDrawer extends StatelessWidget {
                       route: AddProductScreen.id),
                 ]),
             _menu(
-                menuTitle: 'View Order',
+                menuTitle: 'Order',
                 icon: Icons.receipt,
                 route: ProductOrder.id),
           ],

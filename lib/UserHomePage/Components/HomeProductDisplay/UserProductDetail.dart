@@ -1,4 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_app/Cart/CartScreen.dart';
 import 'package:ecommerce_app/Model/HomeproductModel.dart';
 import 'package:ecommerce_app/Cart/Cart.dart';
 import 'package:ecommerce_app/UserHomePage/Components/HomeProductDisplay/ProductBottomsheet.dart';
@@ -21,6 +23,7 @@ class UserProductDetail extends StatefulWidget {
 }
 
 class _UserProductDetailState extends State<UserProductDetail> {
+  DocumentSnapshot? document;
   final CategoryService _service = CategoryService();
   String? _selectedSize;
 
@@ -46,13 +49,22 @@ class _UserProductDetailState extends State<UserProductDetail> {
           iconTheme: const IconThemeData(color: Colors.white),
           title: Text(widget.product!.productName!),
           actions: [
-            CircleAvatar(
-                backgroundColor: const Color(0xFFe2efdd).withOpacity(0.3),
-                radius: 17,
-                child: const Icon(
-                  Icons.shopping_cart,
-                  color: Colors.white,
-                )),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext) =>
+                            CartScreen(document: document)));
+              },
+              child: CircleAvatar(
+                  backgroundColor: const Color(0xFFe2efdd).withOpacity(0.3),
+                  radius: 17,
+                  child: const Icon(
+                    Icons.shopping_cart,
+                    color: Colors.white,
+                  )),
+            ),
             const SizedBox(width: 10),
             CircleAvatar(
                 backgroundColor: const Color(0xFFe2efdd).withOpacity(0.3),

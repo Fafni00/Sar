@@ -19,7 +19,7 @@ class Product {
       this.additionalDetail,
       this.unit,
       this.imageUrls,
-      this.vendor,
+      this.selleruid,
       this.approved});
 
   Product.fromJson(Map<String, Object?> json)
@@ -60,7 +60,7 @@ class Product {
                 : json['additionalDetail']! as String,
             unit: json['unit'] == null ? null : json['unit']! as String,
             imageUrls: json['imageUrls']! as List,
-            vendor: json['vendor']! as Map,
+            selleruid: json['selleruid']! as String,
             approved: json['approved']! as bool);
 
   final String? productName;
@@ -79,7 +79,7 @@ class Product {
   final String? additionalDetail;
   final String? unit;
   final List? imageUrls;
-  final Map? vendor;
+  final String? selleruid;
   final bool? approved;
 
   Map<String, Object?> toJson() {
@@ -100,17 +100,18 @@ class Product {
       'additionalDetail': additionalDetail,
       'unit': unit,
       'imageUrls': imageUrls,
-      'vendor': vendor,
+      'selleruid': selleruid,
       'approved': approved,
     };
   }
 }
 
-User? user = FirebaseAuth.instance.currentUser;
 productQuery(approved) {
+  final userId = FirebaseAuth.instance.currentUser?.uid;
   return FirebaseFirestore.instance
       .collection('products')
       .where('approved', isEqualTo: approved)
+      .where('selleruid', isEqualTo: userId)
       .orderBy('productName')
       .withConverter<Product>(
         fromFirestore: (snapshot, _) => Product.fromJson(snapshot.data()!),

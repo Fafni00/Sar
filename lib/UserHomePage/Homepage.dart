@@ -52,7 +52,7 @@ class _HomepageState extends State<Homepage> {
           additionalDetail: product.additionalDetail,
           unit: product.unit,
           imageUrls: product.imageUrls,
-          vendor: product.vendor,
+          selleruid: product.selleruid,
           approved: product.approved,
         ));
       });

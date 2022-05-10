@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_app/KhaltiPayment/KhaltiPaymentPage.dart';
 import 'package:ecommerce_app/Provider/CartProvider.dart';
 import 'package:ecommerce_app/Services/Cartservices.dart';
 import 'package:ecommerce_app/Services/Orderservices.dart';
@@ -23,40 +24,38 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   final userId = FirebaseAuth.instance.currentUser?.uid;
-  final OrderServices _order = OrderServices();
-  final CartServices _cart = CartServices();
 
+  TextEditingController deliveryController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var _cartProvider = Provider.of<CartProvider>(context);
     final mediaQueary = MediaQuery.of(context).size;
     return Scaffold(
       bottomSheet: Container(
-          height: 60,
-          color: AppColors.buttonColor,
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Rs.${_cartProvider.subTotal.toStringAsFixed(0)}',
-                      style:
-                          const TextStyle(fontSize: 18, color: Colors.white)),
-                  ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.green)),
-                      onPressed: () {
-                        _saveOrder(_cartProvider);
-                        EasyLoading.showSuccess('Your order is submitted');
-                      },
-                      child: const Text('Checkout',
-                          style: TextStyle(fontSize: 18, color: Colors.white)))
-                ],
-              ),
+        height: 160,
+        color: AppColors.buttonColor,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Rs.${_cartProvider.subTotal.toStringAsFixed(0)}',
+                    style: const TextStyle(fontSize: 18, color: Colors.white)),
+                ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.green)),
+                    onPressed: () {
+                      Navigator.pushNamed(context, KhaltiPaymentPage.id);
+                    },
+                    child: const Text('Checkout',
+                        style: TextStyle(fontSize: 18, color: Colors.white)))
+              ],
             ),
-          )),
+          ),
+        ),
+      ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection('cart')
@@ -169,19 +168,5 @@ class _CartScreenState extends State<CartScreen> {
         ],
       ),
     );
-  }
-
-  _saveOrder(CartProvider cartProvider) {
-    _order.saveOrder({
-      'products': cartProvider.cartList,
-      'userId': userId,
-      'orderStatus': 'ordered'
-    }).then((value) {
-      _cart.deleteCart().then((value) {
-        _cart.checkData().then((value) {
-          Navigator.pop(context);
-        });
-      });
-    });
   }
 }

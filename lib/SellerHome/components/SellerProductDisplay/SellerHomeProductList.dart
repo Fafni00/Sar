@@ -19,7 +19,7 @@ class SellerHomeProductList extends StatelessWidget {
           shrinkWrap: true,
           physics: ScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3, childAspectRatio: 1 / 1.30),
+              crossAxisCount: 3, childAspectRatio: 1 / 1.40),
           itemCount: snapshot.docs.length,
           itemBuilder: (context, index) {
             // if we reached the end of the currently obtained items, we try to

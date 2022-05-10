@@ -2,13 +2,20 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/Services/Orderservices.dart';
+import 'package:ecommerce_app/UserProfile/UserProflie.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class MyOrder extends StatelessWidget {
+class MyOrder extends StatefulWidget {
+  static const String id = 'myorder';
   const MyOrder({Key? key}) : super(key: key);
 
+  @override
+  State<MyOrder> createState() => _MyOrderState();
+}
+
+class _MyOrderState extends State<MyOrder> {
   @override
   Widget build(BuildContext context) {
     final OrderServices _order = OrderServices();
@@ -18,10 +25,17 @@ class MyOrder extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.buttonnavigation,
         title: Text(
-          'My Orders',
+          'My Order',
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: ((context) => UserProfile())));
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: StreamBuilder(
@@ -58,11 +72,13 @@ class MyOrder extends StatelessWidget {
                           ExpansionTile(
                             title: Text(
                               'Order Details',
-                              style:
-                                  TextStyle(fontSize: 12, color: Colors.black),
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
                             ),
                             subtitle: Text(
-                              'View Other details',
+                              'View',
                               style:
                                   TextStyle(fontSize: 12, color: Colors.black),
                             ),
@@ -75,11 +91,10 @@ class MyOrder extends StatelessWidget {
                                   return Column(
                                     children: [
                                       ListTile(
-                                        leading: CircleAvatar(
-                                          child: Image.network(
-                                            productDoc?[index]['products'][item]
-                                                ['img'],
-                                          ),
+                                        leading: Image.network(
+                                          productDoc?[index]['products'][item]
+                                              ['img'],
+                                          fit: BoxFit.contain,
                                         ),
                                         title: Text(productDoc?[index]
                                             ['products'][item]['productName']),

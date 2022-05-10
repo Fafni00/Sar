@@ -5,28 +5,29 @@ class ProductProvider with ChangeNotifier {
   Map<String, dynamic>? productData = {'approved': false};
   List<XFile>? imageFiles = [];
 
-  getFormData(
-      {String? productName,
-      String? storeName,
-      int? regularPrice,
-      int? salesPrice,
-      String? category,
-      String? mainCategory,
-      String? subCategory,
-      String? description,
-      DateTime? saledate,
-      String? sku,
-      bool? manageInventory,
-      int? stockonhand,
-      int? reOrderLevel,
-      String? tags,
-      List? sizeList,
-      String? additionalDetail,
-      String? unit,
-      List? imageUrls,
-      Map<String, dynamic>? vendor}) {
-    if (vendor != null) {
-      productData!['vendor'] = vendor;
+  getFormData({
+    String? productName,
+    String? storeName,
+    int? regularPrice,
+    int? salesPrice,
+    String? category,
+    String? mainCategory,
+    String? subCategory,
+    String? description,
+    DateTime? saledate,
+    String? sku,
+    bool? manageInventory,
+    int? stockonhand,
+    int? reOrderLevel,
+    String? tags,
+    List? sizeList,
+    String? additionalDetail,
+    String? unit,
+    List? imageUrls,
+    String? selleruid,
+  }) {
+    if (selleruid != null) {
+      productData!['selleruid'] = selleruid;
     }
     if (productName != null) {
       productData!['productName'] = productName;
@@ -92,7 +93,7 @@ class ProductProvider with ChangeNotifier {
   }
 
   clearProductData() {
-    productData!.clear();
+    productData?.clear();
     imageFiles!.clear();
     productData!['approve'] = false;
     notifyListeners();

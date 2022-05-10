@@ -16,6 +16,7 @@ class CartServices {
       'price': product.regularPrice,
       'storeName': product.storeName,
       'qty': 1,
+      'selleruid': product.selleruid,
       'total': product.regularPrice,
       'img': product.imageUrls?[0] ?? '',
     });
