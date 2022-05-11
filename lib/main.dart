@@ -8,7 +8,9 @@ import 'package:ecommerce_app/Provider/SellerProvider.dart';
 import 'package:ecommerce_app/SellerProduct/AddProduct/AddProductScreen.dart';
 import 'package:ecommerce_app/SellerProduct/AllProduct/AllProduct.dart';
 import 'package:ecommerce_app/SellerProduct/ProductOrder/ProductOrder.dart';
+import 'package:ecommerce_app/SellerProfile/SellerProfileNavigation.dart';
 import 'package:ecommerce_app/SellerProfile/SellerProfileSection.dart';
+import 'package:ecommerce_app/Splashscreen/Splashpage.dart';
 import 'package:ecommerce_app/UserLoginRegistration/UserLogin.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +57,7 @@ class MyApp extends StatelessWidget {
               primarySwatch: Colors.blue,
               scaffoldBackgroundColor: Colors.white,
             ),
-            home: Loginpage(),
+            home: Splashpage(),
             builder: EasyLoading.init(),
             routes: {
               SellerProfileSection.id: (context) => SellerProfileSection(),
@@ -66,6 +68,8 @@ class MyApp extends StatelessWidget {
               ProductOrder.id: (context) => ProductOrder(),
               KhaltiPaymentPage.id: (context) => KhaltiPaymentPage(),
               MyOrder.id: (context) => MyOrder(),
+              SellerProfileNavigation.id: (context) =>
+                  SellerProfileNavigation(),
             },
           );
         });

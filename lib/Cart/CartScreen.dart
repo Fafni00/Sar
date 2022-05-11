@@ -32,7 +32,7 @@ class _CartScreenState extends State<CartScreen> {
     final mediaQueary = MediaQuery.of(context).size;
     return Scaffold(
       bottomSheet: Container(
-        height: 160,
+        height: 80,
         color: AppColors.buttonColor,
         child: Center(
           child: Padding(
@@ -76,7 +76,7 @@ class _CartScreenState extends State<CartScreen> {
               itemBuilder: (ctx, index) {
                 final data = cartData?[index];
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -100,9 +100,6 @@ class _CartScreenState extends State<CartScreen> {
                             width: mediaQueary.width / 3,
                             fit: BoxFit.contain,
                           ),
-                        ),
-                        const SizedBox(
-                          width: 10,
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

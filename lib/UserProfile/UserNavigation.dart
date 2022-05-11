@@ -11,20 +11,20 @@ import 'package:flutter/material.dart';
 
 import '../Cart/Cart.dart';
 
-class categoriesnavigation extends StatefulWidget {
-  const categoriesnavigation({Key? key}) : super(key: key);
+class UserNavigation extends StatefulWidget {
+  const UserNavigation({Key? key}) : super(key: key);
 
   @override
-  State<categoriesnavigation> createState() => _categoriesnavigationState();
+  State<UserNavigation> createState() => _UserNavigationState();
 }
 
-class _categoriesnavigationState extends State<categoriesnavigation> {
+class _UserNavigationState extends State<UserNavigation> {
   List pages = [
     Homepage(),
     CategoriesPage(),
     UserProfile(),
   ];
-  int currentIndex = 1;
+  int currentIndex = 2;
   void onTap(int index) {
     setState(() {
       currentIndex = index;

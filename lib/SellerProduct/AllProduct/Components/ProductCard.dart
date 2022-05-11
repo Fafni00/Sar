@@ -65,14 +65,6 @@ class ProductCard extends StatelessWidget {
                   children: [
                     SlidableAction(
                       flex: 1,
-                      onPressed: (context) {},
-                      backgroundColor: Colors.red.withOpacity(0.8),
-                      foregroundColor: Colors.white,
-                      icon: Icons.delete,
-                      label: 'Delete',
-                    ),
-                    SlidableAction(
-                      flex: 1,
                       onPressed: (context) {
                         _service.products.doc(id).update({
                           'approved': product.approved == false ? true : false

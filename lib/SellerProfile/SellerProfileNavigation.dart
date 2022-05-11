@@ -1,28 +1,23 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
+import 'package:ecommerce_app/SellerHome/SellerHomepage.dart';
 import 'package:ecommerce_app/SellerProfile/SellerProfileSection.dart';
-import 'package:ecommerce_app/UserHomePage/Homepage.dart';
-import 'package:ecommerce_app/UserProfile/UserProflie.dart';
-import 'package:ecommerce_app/category/CategoriesPage.dart';
-
 import 'package:ecommerce_app/Utils/Colors.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../Cart/Cart.dart';
-
-class categoriesnavigation extends StatefulWidget {
-  const categoriesnavigation({Key? key}) : super(key: key);
+class SellerProfileNavigation extends StatefulWidget {
+  static const String id = 'sellerprofilenavigation';
+  SellerProfileNavigation({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  State<categoriesnavigation> createState() => _categoriesnavigationState();
+  State<SellerProfileNavigation> createState() =>
+      _SellerProfileNavigationState();
 }
 
-class _categoriesnavigationState extends State<categoriesnavigation> {
+class _SellerProfileNavigationState extends State<SellerProfileNavigation> {
   List pages = [
-    Homepage(),
-    CategoriesPage(),
-    UserProfile(),
+    SellerHomepage(),
+    SellerProfileSection(),
   ];
   int currentIndex = 1;
   void onTap(int index) {
@@ -42,8 +37,6 @@ class _categoriesnavigationState extends State<categoriesnavigation> {
         selectedItemColor: AppColors.buttonbackgroundColor,
         items: [
           BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.home)),
-          BottomNavigationBarItem(
-              label: 'Categories', icon: Icon(Icons.category)),
           BottomNavigationBarItem(label: 'Profile', icon: Icon(Icons.person)),
         ],
       ),

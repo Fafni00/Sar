@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_app/UserProfile/UserNavigation.dart';
 import 'package:ecommerce_app/UserProfile/UserProflie.dart';
 import 'package:ecommerce_app/Model/Usermodel.dart';
 import 'package:ecommerce_app/Utils/Colors.dart';
@@ -103,8 +104,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   size: 30,
                 ),
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: ((context) => UserProfile())));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: ((context) => UserNavigation())));
                 })),
         body: Form(
             key: _formkey,

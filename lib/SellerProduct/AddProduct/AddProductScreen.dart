@@ -5,6 +5,7 @@ import 'package:ecommerce_app/SellerProduct/AddProduct/component/AddProductImage
 import 'package:ecommerce_app/SellerProduct/AddProduct/component/GeneralProduct.dart';
 import 'package:ecommerce_app/SellerProduct/AddProduct/component/Inventorytab.dart';
 import 'package:ecommerce_app/SellerProduct/AddProduct/component/ProductAttributes.dart';
+import 'package:ecommerce_app/SellerProfile/SellerDrawer.dart';
 
 import 'package:ecommerce_app/SellerProfile/SellerProfileSection.dart';
 import 'package:ecommerce_app/Services/AddProductService.dart';
@@ -61,7 +62,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         ),
                       ]),
                 ),
-                drawer: SellerProfileSection(),
+                drawer: SellerDrawer(),
                 body: TabBarView(
                   children: [
                     GeneralProduct(),

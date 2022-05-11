@@ -6,6 +6,7 @@ import 'package:ecommerce_app/Provider/SellerProvider.dart';
 import 'package:ecommerce_app/SellerProduct/AddProduct/AddProductScreen.dart';
 import 'package:ecommerce_app/SellerProduct/AllProduct/AllProduct.dart';
 import 'package:ecommerce_app/SellerProduct/ProductOrder/ProductOrder.dart';
+import 'package:ecommerce_app/SellerProfile/SellerProfileNavigation.dart';
 import 'package:ecommerce_app/SellerProfile/SellerProfileSection.dart';
 import 'package:ecommerce_app/UserLoginRegistration/UserLogin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -74,7 +75,7 @@ class SellerDrawer extends StatelessWidget {
             _menu(
                 menuTitle: 'Home',
                 icon: Icons.home,
-                route: SellerProfileSection.id),
+                route: SellerProfileNavigation.id),
             ExpansionTile(
                 leading: Icon(
                   Icons.production_quantity_limits,
@@ -117,8 +118,5 @@ class SellerDrawer extends StatelessWidget {
 
   _signOut() async {
     await FirebaseAuth.instance.signOut();
-    User? user = FirebaseAuth.instance.currentUser;
-    print('Current User ');
-    print(user?.uid);
   }
 }

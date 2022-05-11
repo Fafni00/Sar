@@ -24,20 +24,13 @@ class _CategoryHomepageState extends State<CategoryHomepage> {
           const SizedBox(height: 18),
           Padding(
             padding: EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Products For You',
-                    style: TextStyle(
-                        color: AppColors.buttonnavigation,
-                        fontSize: 20,
-                        letterSpacing: 1)),
-                TextButton(
-                    onPressed: () {},
-                    child: Text('View More...',
-                        style: TextStyle(
-                            fontSize: 16, color: AppColors.buttonnavigation)))
-              ],
+            child: Container(
+              margin: EdgeInsets.only(right: 200),
+              child: Text('Products For You',
+                  style: TextStyle(
+                      color: AppColors.buttonnavigation,
+                      fontSize: 20,
+                      letterSpacing: 1)),
             ),
           ),
           Container(
@@ -84,20 +77,6 @@ class _CategoryHomepageState extends State<CategoryHomepage> {
                             );
                           }),
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                          border: Border(
-                              left: BorderSide(
-                                  color: AppColors.buttonnavigation))),
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.arrow_drop_down,
-                          color: AppColors.buttonnavigation,
-                          size: 35,
-                        ),
-                      ),
-                    )
                   ]))),
           HomeProductList(
             category: _selectedCategory,

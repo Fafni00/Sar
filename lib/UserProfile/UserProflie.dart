@@ -32,12 +32,6 @@ class _UserProfileState extends State<UserProfile> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.logout, color: Colors.white),
-            onPressed: () {
-              _signOut(context);
-            },
-          ),
           backgroundColor: AppColors.buttonColor,
           automaticallyImplyLeading: false,
           centerTitle: true,
@@ -99,21 +93,6 @@ class _UserProfileState extends State<UserProfile> {
                   )
                 ]),
               ),
-
-              // to show the View order page
-              Positioned(
-                  right: 10.0,
-                  //top: 10.0,
-                  child: IconButton(
-                    icon: Icon(Icons.edit_outlined,
-                        color: AppColors.buttonbackgroundColor),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: ((context) => UpdateProfile())));
-                    },
-                  )),
             ],
           ),
           // to show the orderpage
@@ -177,11 +156,11 @@ class _UserProfileState extends State<UserProfile> {
                         children: [
                           InkWell(
                               onTap: () {
-                                //   Navigator.push(
-                                //       context,
-                                //       MaterialPageRoute(
-                                //           builder: (BuildContext) =>
-                                //               ViewOrder()));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext) =>
+                                            UpdateProfile()));
                               },
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -194,8 +173,8 @@ class _UserProfileState extends State<UserProfile> {
                                       decoration: BoxDecoration(
                                           image: DecorationImage(
                                               image: AssetImage(
-                                                  "assets/images/chat.png"),
-                                              fit: BoxFit.cover),
+                                                  "assets/images/editprofile.png"),
+                                              fit: BoxFit.contain),
                                           color: Colors.white,
                                           borderRadius:
                                               BorderRadius.circular(6),
@@ -216,9 +195,9 @@ class _UserProfileState extends State<UserProfile> {
                                     SizedBox(height: 4),
                                     Container(
                                         margin: EdgeInsets.only(
-                                            left: 25, bottom: 20),
+                                            left: 18, bottom: 20),
                                         child: Text(
-                                          'Queries',
+                                          'Edit Profile',
                                           style: TextStyle(
                                             fontSize: 20,
                                             color: Color(0xFF056608),
@@ -232,8 +211,28 @@ class _UserProfileState extends State<UserProfile> {
                   ),
                 ]),
               ])
-            ])
-          ])
+            ]),
+          ]),
+          Container(
+            margin: EdgeInsets.only(top: 236),
+            width: 400,
+            height: 40,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.vertical(),
+              color: AppColors.textboxColor,
+            ),
+            child: InkWell(
+              child: Text('Log Out',
+                  style: TextStyle(
+                      color: AppColors.buttonnavigation,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold)),
+              onTap: () {
+                _signOut(context);
+              },
+            ),
+          )
         ])));
   }
 
