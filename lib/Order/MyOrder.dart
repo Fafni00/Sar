@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_app/Review/AddReview.dart';
 import 'package:ecommerce_app/Services/Orderservices.dart';
 import 'package:ecommerce_app/UserProfile/UserNavigation.dart';
 import 'package:ecommerce_app/UserProfile/UserProflie.dart';
@@ -130,6 +131,15 @@ class _MyOrderState extends State<MyOrder> {
                   );
                 });
           }
+        },
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: Icon(Icons.add),
+        label: Text('Add Review'),
+        backgroundColor: AppColors.buttonnavigation,
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: ((context) => AddReview())));
         },
       ),
     );

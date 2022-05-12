@@ -411,7 +411,7 @@ class _SellerRegistrationFormState extends State<SellerRegistrationForm> {
         'panNumber': _panNumber.text,
         'vatNumber': _vatNumber.text,
         'address': _address.text,
-        'approved': false,
+        'approved': true,
         'uid': _newUid
       });
     });

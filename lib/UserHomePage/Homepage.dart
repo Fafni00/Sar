@@ -72,7 +72,7 @@ class _HomepageState extends State<Homepage> {
           //code for the background picture and Text on the topleft corner of the screen
           Container(
             //inserting background picture and adjusting its size
-            height: 130,
+            height: 100,
             margin: EdgeInsets.only(right: 240),
             alignment: Alignment.topLeft,
             decoration: BoxDecoration(
@@ -84,88 +84,21 @@ class _HomepageState extends State<Homepage> {
 
           Container(
               width: 400,
-              margin: EdgeInsets.only(left: 30, top: 0),
+              margin: EdgeInsets.only(
+                left: 150,
+              ),
               child: Row(
                 children: <Widget>[
                   Column(
                     children: <Widget>[
                       Text('Sār',
                           style: TextStyle(
-                            fontSize: 50,
+                            fontSize: 60,
                             fontWeight: FontWeight.bold,
                             color: const Color(0xFF056608),
                           )),
                     ],
                   ),
-
-                  //to create the search bar on the header section
-                  Column(children: [
-                    Container(
-                        margin: EdgeInsets.only(left: 20),
-                        height: 45,
-                        width: 220,
-                        decoration: BoxDecoration(
-                          color: AppColors.textboxColor,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 10,
-                              spreadRadius: 5,
-                              offset: Offset(1, 10),
-                              color: Colors.grey.withOpacity(0.3),
-                            ),
-                          ],
-                        ),
-                        // to create the hint text and prefix icon in the search bar
-                        child: TextField(
-                          onTap: () {
-                            showSearch(
-                                context: context,
-                                delegate: SearchPage<Product>(
-                                  items: _productList,
-                                  searchLabel: 'Search Product',
-                                  suggestion: Center(
-                                    child: Text(
-                                        'Find Product by Name and Categories'),
-                                  ),
-                                  failure: Center(
-                                    child: Text('No Product found'),
-                                  ),
-                                  filter: (product) => [
-                                    product.productName,
-                                    product.category,
-                                    product.mainCategory,
-                                    product.subCategory
-                                  ],
-                                  builder: (product) => ListTile(),
-                                ));
-                          },
-                          //controller: searchController,
-                          decoration: InputDecoration(
-                            hintText: "Search",
-                            hintStyle: TextStyle(
-                                fontSize: 14, color: AppColors.text1Color),
-                            prefixIcon: Icon(
-                              Icons.search,
-                              color: AppColors.text1Color,
-                            ),
-
-                            //for focused border
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                borderSide: BorderSide(
-                                  width: 1.0,
-                                  color: Colors.white,
-                                )),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                borderSide: BorderSide(
-                                  width: 1.0,
-                                  color: Colors.white,
-                                )),
-                          ),
-                        )),
-                  ])
                 ],
               )),
           //to create the announcement in the page

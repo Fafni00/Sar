@@ -80,6 +80,12 @@ class _UserProductDetailState extends State<UserProductDetail> {
             child: Column(
           children: [
             const SizedBox(height: 10),
+            Container(
+              margin: EdgeInsets.only(left: 240),
+              child: Text('Not verfied yet',
+                  style: TextStyle(
+                      fontSize: 15, color: AppColors.buttonnavigation)),
+            ),
             //to show product image
             SizedBox(
               height: 200,
@@ -255,7 +261,7 @@ class _UserProductDetailState extends State<UserProductDetail> {
         height: 50,
         child: Row(
           children: [
-            const SizedBox(width: 10),
+            const SizedBox(width: 30),
             //to go to homepage
             InkWell(
               onTap: () {
@@ -273,28 +279,12 @@ class _UserProductDetailState extends State<UserProductDetail> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: VerticalDivider(color: AppColors.buttonnavigation),
-            ),
-            const SizedBox(width: 20),
 
-            //to add Queries
-            InkWell(
-              onTap: () {},
-              child: Column(
-                children: [
-                  Icon(Icons.chat, color: AppColors.buttonnavigation),
-                  Text('Query',
-                      style: TextStyle(color: AppColors.buttonnavigation)),
-                ],
-              ),
-            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: VerticalDivider(color: AppColors.buttonnavigation),
             ),
-            const SizedBox(width: 20),
+            const SizedBox(width: 40),
             CartPage(
               product: widget.product,
               productId: widget.productID ?? '',
